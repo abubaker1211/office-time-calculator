@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Install App - Office Time Calculator</title>
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+      max-width: 800px;
+      margin: auto;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    h1, h2 {
+      color: #1976d2;
+    }
+    section {
+      margin-bottom: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #546e7a;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .back-button:hover {
+            background-color: #37474f;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+        }
+
+
+
+     body.dark .back-button {
+            background-color: #90a4ae;
+        }
+        body.dark .back-button:hover {
+            background-color: #78909c;
+        }
+
+        
+
+  </style>
+</head>
+<body>
+
+  <h1>Install Office Time Calculator as an App</h1>
+
+  <section id="android">
+    <h2>📱 Android</h2>
+    <p>To install this app on your Android device:</p>
+    <ol>
+      <li>Open this website in <strong>Chrome</strong> browser.</li>
+      <li>Tap on the <strong>three dots</strong> menu (⋮) on the top-right corner.</li>
+      <li>Select <strong>"Add to Home screen"</strong>.</li>
+    </ol>
+    <button id="installBtn">Install App Now</button>
+    <p class="note">Note: This button works only if your browser supports install prompt and you've visited the homepage.</p>
+  </section>
+
+  <section id="ios">
+    <h2>🍏 iOS (Safari)</h2>
+    <p>To install this app on your iPhone or iPad:</p>
+    <ol>
+      <li>Open this website in <strong>Safari</strong>.</li>
+      <li>Tap the <strong>Share</strong> button (the square with the arrow pointing up).</li>
+      <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.</li>
+    </ol>
+  </section>
+
+  <section id="desktop">
+    <h2>💻 Desktop (Chrome / Edge)</h2>
+    <p>To install this app on desktop:</p>
+    <ol>
+      <li>Click on the <strong>Install icon</strong> in the address bar (looks like a monitor with a down arrow).</li>
+      <li>Or open Chrome menu (⋮) and select <strong>"Install Office Time Calculator"</strong>.</li>
+    </ol>
+     <button id="installBtn2">Install App Now</button>
+    <p class="note">Note: This button works only if your browser supports install prompt and you've visited the homepage.</p>
+  </section>
+
+   <a href="index.html" class="back-button">Back to App</a>
+
+  <script>
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    const installBtn = document.getElementById('installBtn');
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      } else {
+        alert('Install option not available. Try visiting the homepage again.');
+      }
+    });
+
+
+    const installBtn2 = document.getElementById('installBtn2');
+    installBtn2.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      } else {
+        alert('Install option not available. Try visiting the homepage again.');
+      }
+    });
+  </script>
+</body>
+</html>

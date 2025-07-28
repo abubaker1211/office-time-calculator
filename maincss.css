@@ -1,0 +1,720 @@
+
+        /* Refined Professional Color Palette:
+            Light Mode:
+              Body Background: #f5f7fa (Very Light Blue-Grey)
+              Container Background: #ffffff (White)
+              Primary Accent (Buttons/Headings): #3f51b5 (Indigo)
+              Secondary Text/Labels: #546e7a (Blue Grey)
+              Input Background: #eceff1 (Light Blue Grey)
+              Input Border: #cfd8dc (Lighter Blue Grey)
+              Status Box Background: #e8f5e9 (Light Green)
+              Status Text: #388e3c (Dark Green)
+              Ad Placeholder: #eceff1 (Light Blue Grey)
+
+            Dark Mode:
+              Body Background: #2c3e50 (Dark Blue-Grey)
+              Container Background: #34495e (Medium Dark Blue-Grey)
+              Primary Accent (Buttons/Headings): #64b5f6 (Light Blue)
+              Secondary Text/Labels: #b0bec5 (Lighter Blue Grey)
+              Input Background: #455a64 (Darker Blue Grey)
+              Input Border: #607d8b (Blue Grey)
+              Status Box Background: #455a64 (Darker Blue Grey)
+              Status Text: #b0bec5 (Lighter Blue Grey)
+              Ad Placeholder: #455a64 (Darker Blue Grey)
+
+            Common:
+              IN Button: Primary Accent Blue
+              OUT Button: Secondary Text/Label Grey
+              Break ON: Green
+              Break OFF: Red
+              Reset Button: Secondary Text/Label Grey
+        */
+
+        body {
+            font-family: sans-serif;
+            background-color: #f5f7fa; /* Very Light Blue-Grey background for light mode */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+            color: #263238; /* Default dark text color for light mode */
+        }
+        .container {
+            background-color: #ffffff; /* White card for light mode */
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #3f51b5; /* Indigo for heading */
+            transition: color 0.3s ease;
+        }
+        .notification-settings h3 {
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #3f51b5; /* Indigo for heading */
+            transition: color 0.3s ease;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #546e7a; /* Blue Grey for labels */
+            text-align: left;
+            transition: color 0.3s ease;
+        }
+        input[type="number"],
+        input[type="time"] {
+            width: 100%; /* Default width for inputs */
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cfd8dc; /* Lighter Blue Grey border */
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            color: #263238; /* Input text color */
+            background-color: #eceff1; /* Light Blue Grey input background */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        /* Specific style for shift duration input - now full width */
+        #shiftDuration {
+            width: 100%; /* Full width */
+            text-align: left; /* Default text alignment */
+            font-size: 1rem; /* Default font size */
+            font-weight: normal; /* Default font weight */
+            padding: 0.75rem; /* Default padding */
+            margin-bottom: 1rem; /* Default bottom margin */
+        }
+        input[type="number"]:focus,
+        input[type="time"]:focus {
+            outline: none;
+            border-color: #3f51b5; /* Indigo focus border */
+            box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2); /* Focus ring */
+        }
+        .input-flex-wrapper { /* New class for input and button wrapper */
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .input-flex-wrapper input {
+            flex: 1; /* Make input take available space */
+            margin-bottom: 0; /* Remove bottom margin from input inside flex */
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .main-button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 0.75rem;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+        .main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+        }
+        /* Professional Colors for IN/OUT Buttons */
+        .btn-in {
+            background-color: #3f51b5; /* Indigo */
+        }
+        .btn-in:hover {
+            background-color: #303f9f; /* Darker Indigo */
+        }
+        .btn-out {
+            background-color: #546e7a; /* Blue Grey */
+        }
+        .btn-out:hover {
+            background-color: #37474f; /* Darker Blue Grey */
+        }
+        .btn-reset {
+            background-color: #90a4ae; /* Blue Grey */
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-reset:hover {
+            background-color: #78909c; /* Darker Blue Grey */
+            transform: translateY(-1px);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+        }
+        /* Professional Colors for Break Toggle Button */
+        .btn-toggle {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 0.75rem;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-toggle.on {
+            background-color: #4CAF50; /* Green for ON */
+        }
+        .btn-toggle.on:hover {
+            background-color: #388E3C; /* Darker Green */
+        }
+        .btn-toggle.off {
+            background-color: #f44336; /* Red for OFF */
+        }
+        .btn-toggle.off:hover {
+            background-color: #d32f2f; /* Darker Red */
+        }
+        .status-box {
+            background-color: #e8f5e9; /* Light Green for status box */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            color: #388e3c; /* Dark Green text */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .status-box p {
+            margin-bottom: 0.5rem;
+            color: #388e3c; /* Dark Green text */
+            transition: color 0.3s ease;
+        }
+        /* Increased font size for status and leaving time */
+        .status-box .display-text {
+            font-size: 2rem; /* Increased from 1.5rem */
+            font-weight: bold;
+            color: #1b5e20; /* Even darker green */
+            transition: color 0.3s ease;
+        }
+        .status-box .large-text {
+            font-size: 3rem; /* Increased from 2.5rem */
+            font-weight: bolder;
+            color: #1b5e20;
+            transition: color 0.3s ease;
+        }
+        .ad-placeholder {
+            background-color: #eceff1; /* Light Blue Grey for ads */
+            border: 1px dashed #cfd8dc; /* Dashed border */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            color: #546e7a; /* Blue Grey text */
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Dark mode styles */
+        body.dark {
+            background-color: #2c3e50; /* Dark Blue-Grey background */
+            color: #e0e0e0; /* Light text */
+        }
+        body.dark .container {
+            background-color: #34495e; /* Medium Dark Blue-Grey card */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        body.dark h1 {
+            color: #64b5f6; /* Light Blue for heading */
+        }
+        body.dark .notification-settings h3 {
+            color: #64b5f6; /* Light Blue for heading */
+        }
+        body.dark label {
+            color: #b0bec5; /* Lighter Blue Grey for labels */
+        }
+        /* Fix for Break Status and Timer text in dark mode */
+        body.dark .break-status-text { /* New class for Break Status label */
+            color: #e0e0e0; /* White text */
+        }
+        body.dark #breakTimer { /* Direct ID for timer */
+            color: #e0e0e0; /* White text */
+        }
+        /* Fix for Total Break text in dark mode */
+        body.dark #totalBreakTimeDisplay {
+            color: #e0e0e0; /* White text */
+        }
+
+
+        body.dark input[type="number"],
+        body.dark input[type="time"] {
+            background-color: #455a64; /* Darker Blue Grey input background */
+            color: #e0e0e0;
+            border-color: #607d8b;
+        }
+        body.dark input[type="number"]:focus,
+        body.dark input[type="time"]:focus {
+            border-color: #64b5f6;
+            box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.3);
+        }
+        body.dark .main-button {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        body.dark .main-button:hover {
+            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+        }
+        body.dark .btn-in {
+            background-color: #64b5f6; /* Light Blue for IN */
+        }
+        body.dark .btn-in:hover {
+            background-color: #42a5f5;
+        }
+        body.dark .btn-out {
+            background-color: #90a4ae; /* Blue Grey for OUT */
+        }
+        body.dark .btn-out:hover {
+            background-color: #78909c;
+        }
+        body.dark .btn-reset {
+            background-color: #90a4ae; /* Blue Grey for Reset */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        body.dark .btn-reset:hover {
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+        }
+        body.dark .btn-toggle {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        body.dark .btn-toggle.on {
+            background-color: #66bb6a; /* Green for ON */
+        }
+        body.dark .btn-toggle.on:hover {
+            background-color: #43a047;
+        }
+        body.dark .btn-toggle.off {
+            background-color: #ef5350; /* Red for OFF */
+        }
+        body.dark .btn-toggle.off:hover {
+            background-color: #e53935;
+        }
+        body.dark .status-box {
+            background-color: #455a64; /* Darker Blue Grey for status box */
+            color: #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        body.dark .status-box p {
+            color: #b0bec5;
+        }
+        body.dark .status-box .display-text,
+        body.dark .status-box .large-text {
+            color: #64b5f6;
+        }
+        body.dark .ad-placeholder {
+            background-color: #455a64; /* Darker Blue Grey for ads */
+            border-color: #607d8b;
+            color: #b0bec5;
+        }
+        body.dark #darkModeToggle {
+            background-color: #607d8b; /* Blue Grey for toggle button */
+            color: #e0e0e0;
+        }
+        /* Reports Section specific styles */
+        #reportsSection {
+            background-color: var(--container-bg); /* Use CSS variables for consistent theme */
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            color: var(--secondary-text); /* Ensure general text color applies */
+        }
+        #reportsSection h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-accent);
+        }
+        #reportsList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 300px; /* Make it scrollable if many reports */
+            overflow-y: auto;
+            border: 1px solid var(--input-border);
+            border-radius: 0.5rem;
+            background-color: var(--input-bg);
+            padding: 0.5rem;
+        }
+        #reportsList li {
+            background-color: var(--body-bg); /* Lighter background for list items */
+            margin-bottom: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: left;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+            color: var(--secondary-text-label); /* Use a consistent text color for list items */
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        #reportsList li strong {
+            color: var(--primary-accent);
+        }
+        #reportsList li span {
+            font-size: 0.85rem;
+            color: var(--secondary-text-label);
+        }
+        #reportsList li:last-child {
+            margin-bottom: 0;
+        }
+        #noReportsMessage {
+            color: var(--secondary-text-label);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+        #clearAllReportsBtn {
+            background-color: #f44336; /* Red for danger action */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #clearAllReportsBtn:hover {
+            background-color: #d32f2f;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+        }
+
+        /* Dark mode specific for reports section */
+        body.dark #reportsSection {
+            background-color: #34495e; /* Medium Dark Blue-Grey card */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            color: #e0e0e0;
+        }
+        body.dark #reportsSection h2 {
+            color: #64b5f6; /* Light Blue for heading */
+        }
+        body.dark #reportsList {
+            border-color: #607d8b;
+            background-color: #455a64; /* Darker Blue Grey input background */
+        }
+        body.dark #reportsList li {
+            background-color: #2c3e50; /* Dark Blue-Grey background */
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            color: #b0bec5;
+        }
+        body.dark #reportsList li strong {
+            color: #64b5f6;
+        }
+        body.dark #reportsList li span {
+            color: #b0bec5;
+        }
+        body.dark #clearAllReportsBtn {
+            background-color: #ef5350; /* Lighter Red for dark mode */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        body.dark #clearAllReportsBtn:hover {
+            background-color: #e53935;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+        }
+
+        /* CSS Variables for easier theme management in JS */
+        :root {
+            --body-bg: #f5f7fa;
+            --container-bg: #ffffff;
+            --primary-accent: #3f51b5;
+            --secondary-text: #546e7a;
+            --secondary-text-label: #546e7a; /* Added for clarity */
+            --input-bg: #eceff1;
+            --input-border: #cfd8dc;
+        }
+
+        body.dark {
+            --body-bg: #2c3e50;
+            --container-bg: #34495e;
+            --primary-accent: #64b5f6;
+            --secondary-text: #e0e0e0;
+            --secondary-text-label: #b0bec5; /* Changed for dark mode */
+            --input-bg: #455a64;
+            --input-border: #607d8b;
+        }
+
+        /* View Reports button styling */
+        #viewReportsBtn {
+            background-color: #3f51b5; /* Light mode: Same as IN button */
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #viewReportsBtn:hover {
+            background-color: #303f9f; /* Light mode hover */
+        }
+
+        body.dark #viewReportsBtn {
+            background-color: #64b5f6; /* Dark mode: Same as IN button */
+            color: white;
+        }
+        body.dark #viewReportsBtn:hover {
+            background-color: #42a5f5; /* Dark mode hover */
+        }
+
+        /* Small date text styling */
+        .small-date-text {
+            font-size: 0.75rem; /* Choti si font size */
+            color: #546e7a; /* Light mode mein blue-grey */
+            transition: color 0.3s ease;
+        }
+
+        body.dark .small-date-text {
+            color: #b0bec5; /* Dark mode mein lighter blue-grey */
+        }
+
+        /* Scroll message styling */
+        #scrollMessage {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            font-size: 0.9rem;
+            opacity: 0;
+            visibility: hidden; /* Control visibility with this */
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Add visibility to transition */
+        }
+        #scrollMessage.visible {
+            opacity: 1;
+            visibility: visible; /* Make it visible */
+        }
+
+        /* Message box styling (for showMessage and showConfirmation) */
+        .custom-message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--container-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-align: center;
+            color: var(--secondary-text);
+            font-weight: bold;
+            max-width: 80%;
+        }
+        .custom-message-box button {
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: var(--primary-accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .custom-message-box #confirmYes {
+            background-color: #4CAF50;
+            margin-right: 10px;
+        }
+        .custom-message-box #confirmNo {
+            background-color: #f44336;
+        }
+
+        /* Filter and Sort controls styling */
+        .filter-sort-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: var(--input-bg);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .filter-sort-controls label {
+            font-weight: normal;
+            color: var(--secondary-text-label);
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .filter-sort-controls select,
+        .filter-sort-controls input[type="date"] {
+            flex: 1;
+            min-width: 120px; /* Ensure inputs don't get too small */
+            padding: 0.5rem;
+            border: 1px solid var(--input-border);
+            border-radius: 0.5rem;
+            background-color: var(--container-bg); /* Use container bg for these inputs */
+            color: var(--secondary-text);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .filter-sort-controls select:focus,
+        .filter-sort-controls input[type="date"]:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+        }
+
+        .filter-sort-controls button {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            border: none;
+            color: white;
+            background-color: #3f51b5; /* Primary accent for apply button */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filter-sort-controls button:hover {
+            background-color: #303f9f;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+        }
+
+        body.dark .filter-sort-controls select,
+        body.dark .filter-sort-controls input[type="date"] {
+            background-color: #34495e; /* Darker background for inputs in dark mode */
+            color: #e0e0e0;
+            border-color: #607d8b;
+        }
+        body.dark .filter-sort-controls button {
+            background-color: #64b5f6; /* Light blue for dark mode apply button */
+        }
+        body.dark .filter-sort-controls button:hover {
+            background-color: #42a5f5;
+        }
+
+        /* Notification settings styling */
+        .notification-settings {
+            background-color: var(--input-bg);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 1.5rem;
+            text-align: left;
+            color: var(--secondary-text-label);
+        }
+
+        .notification-settings div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-settings label {
+            margin-bottom: 0;
+            margin-right: 10px;
+            font-weight: normal;
+        }
+
+        .notification-settings input[type="checkbox"] {
+            margin-right: 5px;
+            width: auto; /* Override full width */
+            margin-bottom: 0; /* Override margin-bottom */
+        }
+
+        .notification-settings input[type="number"] {
+            width: 80px; /* Smaller width for minutes input */
+            margin-bottom: 0; /* Override margin-bottom */
+            text-align: center;
+        }
+
+        body.dark .notification-settings {
+            background-color: #455a64;
+             color: #ffffff;
+            color: #b0bec5;
+        }
+        
+
+        /* General styling for the notification-settings container */
+.notification-settings {
+    padding: 20px; /* Thoda space around the section */
+    margin-bottom: 20px; /* Niche se doosre sections se separation */
+    background-color: #ffffff; /* Example: light background for the section */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow */
+    /* Adjust colors as per your muted color scheme */
+}
+
+.notification-settings h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Styling for individual setting rows */
+.notification-settings > div {
+    margin-bottom: 15px; /* Spacing between each setting row */
+    display: flex; /* Use flexbox for better alignment */
+    align-items: center; /* Vertically align items */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 10px; /* Space between flex items */
+}
+
+/* For the checkbox and label */
+#enableNotificationsCheckbox {
+    margin-right: 8px; /* Space between checkbox and label */
+    transform: scale(1.2); /* Make checkbox slightly larger for touch */
+}
+
+.notification-settings label {
+    font-size: 1em;
+    color: #555; /* Slightly lighter text color */
+    flex-shrink: 0; /* Prevent label from shrinking too much */
+}
+
+/* For the reminder input field */
+#reminderMinutesInput {
+    width: 60px; /* Fixed width for the input field */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1em;
+    -moz-appearance: textfield; /* Hide default number input arrows in Firefox */
+}
+
+/* Hide default number input arrows in WebKit browsers (Chrome, Safari, Edge) */
+#reminderMinutesInput::-webkit-outer-spin-button,
+#reminderMinutesInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+/* Media Query for very small screens (optional, if default flexwrap isn't enough) */
+@media (max-width: 400px) {
+    .notification-settings > div {
+        flex-direction: column; /* Stack items vertically on very small screens */
+        align-items: flex-start; /* Align items to the start when stacked */
+    }
+}
+    
