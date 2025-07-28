@@ -6,7 +6,7 @@
 // - Added clients.claim() during activate to take control without reload
 // - Clean old caches more robustly
 
-const CACHE_NAME = 'office-time-calculator-cache-v2';
+const CACHE_NAME = 'office-time-calculator-cache-v6';
 
 // URLs to cache – extend this list as you add pages/assets
 const urlsToCache = [

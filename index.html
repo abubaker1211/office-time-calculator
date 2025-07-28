@@ -7,20 +7,22 @@
 <title>Office Time Calculator</title>
 <!-- PWA Manifest Link -->
 <link href="/manifest.json" rel="manifest"/>
-<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4157122551548487"></script>
 <!-- Custom CSS for a professional look with clear light/dark mode and fixed text visibility -->
 
 <link href="maincss.css" rel="stylesheet"/></head>
 <body class="flex flex-col items-center justify-content-center min-h-screen p-4">
-<header style="width: 100%; max-width: 400px; margin-bottom: 1rem;">
-<nav style="display: flex; justify-content: space-around; align-items: center; background-color: var(--container-bg); padding: 0.75rem 1rem; border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-weight: bold;">
-<a href="index.html" style="color: var(--primary-accent); text-decoration: none;">Home</a>
-<a href="install.html" style="color: var(--primary-accent); text-decoration: none;">Install App</a>
-<a href="about.html" style="color: var(--primary-accent); text-decoration: none;">About</a>
-<a href="contactus.html" style="color: var(--primary-accent);; text-decoration: none;">Contact Dev</a>
-</nav>
-</header>
-<div class="container">
+<header>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="install.html" class="nav-link">Install App</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contactus.html" class="nav-link">Contact Dev</a>
+            <a href="tips.html" class="nav-link">Productivity Tips</a>
+        </nav>
+    </header>
+
+<main class="content-wrapper">
+    <section class="page-section">
 <h1>Office Time Calculator</h1>
 <!-- Dark Mode Toggle Button and View Reports Button in a flex container -->
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
@@ -84,7 +86,8 @@
 </div>
 </div>
 <!-- Reports Section (New) -->
-<div class="container hidden" id="reportsSection">
+ 
+<div class="content-wrapper" id="reportsSection">
 <h2>Daily Work Reports</h2>
 <!-- Filter and Sort Controls -->
 <div class="filter-sort-controls">
@@ -109,34 +112,64 @@
 </div>
 <!-- Banner Ad Placeholders -->
 <div class="ad-placeholder">
-<div overflow=""></div>
- </p>
-<!-- <p style="font-size: 0.75rem; color: #546e7a;">This is an ad placement.</p> -->
+<div class="ad-content-placeholder productivity-tips">
+    <h3>🚀 Boost Your Daily Productivity!</h3>
+    <p>How can you make your work day even better? Here are some quick tips to help you stay organized and focused throughout your day. Did you know that short breaks can increase your efficiency? Or how important it is to prioritize your tasks? With our app, master your schedule and make every day productive!</p>
+    <a href="tips.html" class="placeholder-link">Explore More Tips &rarr;</a>
 </div>
+</div>
+
 <div class="ad-placeholder">
-<div overflow=""></div>
-</p>
-<!-- <p style="font-size: 0.75rem; color: #546e7a;">This is an ad placement.</p> -->
+<div class="ad-content-placeholder user-testimonials">
+    <h3>🌟 What Our Users Are Saying!</h3>
+    <div class="testimonial-item">
+        <p>"My daily time tracking has become so easy. The Reports feature is amazing!"</p>
+        <p class="author">- Priya S.</p>
+    </div>
+
+
+    <div class="testimonial-item">
+        <p>"The offline functionality helped me a lot when I was traveling."</p>
+        <p class="author">- Amit R.</p>
+    </div>
+    <div class="testimonial-item">
+        <p>"Notifications never let me miss the end of my shift. Highly recommended!"</p>
+        <p class="author">- Sarah L.</p>
+    </div>
+    <p>Start your productivity journey today!</p>
+    <a href="#" class="placeholder-link">Share Your Experience &rarr;</a>
+</div>  
 </div>
+
 <div class="ad-placeholder">
-<div overflow=""></div>
-</p>
-<!-- <p style="font-size: 0.75rem; color: #546e7a;">This is an ad placement.</p> -->
+<div class="ad-content-placeholder pwa-features">
+    <h3>📱 Maximise Your Office Time Calculator Experience!</h3>
+    <ul>
+        <li>**Instant Access:** Install and launch directly from your desktop/mobile app icon, without opening the browser!</li>
+        <li>**Offline Support:** No internet? No problem! Track your entries offline, and data will automatically save when synced.</li>
+        <li>**Lightweight:** It takes up less space on your device and runs fast.</li>
+        <li>**Always Updated:** Always with the latest features, without manual updates.</li>
+    </ul>
+    <p>Install now to take your productivity to the next level!</p>
+    <a href="#" class="placeholder-link">Learn More About PWA &rarr;</a>
 </div>
+</section>
+</main>
 <!-- Scroll Message (New) -->
 <div id="scrollMessage">
         Scroll down to view reports
     </div>
 
-<footer style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: #546e7a;">
-<div style="margin-bottom: 0.5rem;">
-<a href="privacy.html" style="color: #546e7a; text-decoration: none; margin-right: 10px;">Privacy Policy</a>
-        |
-        <a href="terms.html" style="color: #546e7a; text-decoration: none; margin-left: 10px;">Terms of Service</a>
-</div>
-<div style="font-size: 0.75rem; color: #90a4ae;">
-        Made with <span style="color: red;">❤️</span> by Abubaker
-    </div>
-</footer>
-<script src="script.js"></script></body>
+    <footer>
+       <nav class="footer-nav">
+            <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+        </nav>
+        <p>Made with <span style="color: red;">❤️</span> by Abubaker</p>
+    </footer>
+
+<script src="script.js"></script>
+
+</body>
 </html>
+
+<!DOCTYPE html>

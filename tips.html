@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Tips - Office Time Calculator PWA</title>
+    <link href="maincss.css" rel="stylesheet"/>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <meta name="theme-color" content="#4a4a8a">
+
+</head>
+<body>
+     <header>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="install.html" class="nav-link">Install App</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contactus.html" class="nav-link">Contact Dev</a>
+            <a href="tips.html" class="nav-link">Productivity Tips</a>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="page-section">
+            <h1>Productivity Tips for Your Workday</h1>
+            <p>Unlock your full potential with these effective strategies designed to help you manage your time better and boost your efficiency. The Office Time Calculator PWA is your partner in achieving a more productive work-life balance.</p>
+
+            <div class="tip-card">
+                <h2>1. The Pomodoro Technique</h2>
+                <p>Work in focused 25-minute intervals, followed by short 5-minute breaks. After four Pomodoros, take a longer break (15-30 minutes). This method helps maintain focus and prevents burnout.</p>
+                <ul>
+                    <li>Set a timer for 25 minutes for a task.</li>
+                    <li>Work without distractions until the timer rings.</li>
+                    <li>Take a 5-minute break.</li>
+                    <li>Repeat four times, then take a longer break.</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h2>2. Prioritize Your Tasks (Eisenhower Matrix)</h2>
+                <p>Categorize your tasks based on urgency and importance. This helps you focus on what truly matters and avoid getting bogged down by less critical activities.</p>
+                <ul>
+                    <li>**Urgent & Important:** Do first (e.g., crises, deadlines).</li>
+                    <li>**Important, Not Urgent:** Decide when to do (e.g., planning, relationship building).</li>
+                    <li>**Urgent, Not Important:** Delegate (e.g., some emails, interruptions).</li>
+                    <li>**Not Urgent & Not Important:** Delete (e.g., time wasters).</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h2>3. Minimize Distractions</h2>
+                <p>Identify and eliminate common distractions in your work environment. This could mean turning off notifications, closing unnecessary tabs, or finding a quiet space.</p>
+                <ul>
+                    <li>Turn off non-essential notifications on your phone and computer.</li>
+                    <li>Close irrelevant browser tabs and applications.</li>
+                    <li>Use noise-cancelling headphones if your environment is noisy.</li>
+                    <li>Communicate your focus time to colleagues or family.</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h2>4. Take Regular Breaks</h2>
+                <p>Even short breaks can significantly improve your concentration and reduce mental fatigue. Step away from your screen, stretch, or do something relaxing for a few minutes.</p>
+                <ul>
+                    <li>Aim for a 5-10 minute break every hour.</li>
+                    <li>Stand up and stretch.</li>
+                    <li>Look away from your screen (e.g., out a window).</li>
+                    <li>Hydrate yourself.</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h2>5. Plan Your Day in Advance</h2>
+                <p>Before your workday begins, take 10-15 minutes to plan your tasks and set clear goals. This provides clarity and direction, making you more efficient.</p>
+                <ul>
+                    <li>List your top 3-5 priorities for the day.</li>
+                    <li>Estimate how long each task will take.</li>
+                    <li>Allocate specific time slots for tasks.</li>
+                    <li>Review your plan at the end of the day.</li>
+                </ul>
+            </div>
+
+            <p class="back-to-app-link">
+                <a href="index.html" class="button">Back to App</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+       <nav class="footer-nav">
+            <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+        </nav>
+        <p>Made with <span style="color: red;">❤️</span> by Abubaker</p>
+    </footer>
+
+    <script>
+        function applyDarkModeOnLoad() {
+            const savedState = localStorage.getItem('officeTimeCalculatorState');
+            if (savedState) {
+                try {
+                    const state = JSON.parse(savedState);
+                     if (state.isDarkMode) {
+                        document.body.classList.add('dark');
+                    } else {
+                        document.body.classList.remove('dark');
+                    }
+                } catch (e) {
+                    console.error("Error parsing stored state for dark mode:", e);
+                    // Optionally remove corrupted state
+                    localStorage.removeItem('officeTimeCalculatorState');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', applyDarkModeOnLoad);
+        // If script.js contains other functionality, it should be linked separately or its contents added here.
+    </script>
+</body>
+</html>
