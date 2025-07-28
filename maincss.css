@@ -873,7 +873,7 @@ body.dark .pwa-features h3 { /* Changed from body.dark-mode */
 
 /* Navigation bar styling (for header in all pages) */
 header {
-    width: 100%;
+    max-width: 900px;
     /* max-width: 400px; /* Removed max-width from header for full width design */
     margin: 0 auto 1.5rem auto; /* Top/Bottom margin, auto left/right for centering */
     padding: 0.75rem 1rem;
