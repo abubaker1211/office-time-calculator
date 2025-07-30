@@ -12,13 +12,7 @@
 <link href="maincss.css" rel="stylesheet"/></head>
 <body class="flex flex-col items-center justify-content-center min-h-screen p-4">
 <header>
-        <nav class="main-nav">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="install.html" class="nav-link">Install App</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="contactus.html" class="nav-link">Contact Dev</a>
-            <a href="tips.html" class="nav-link">Productivity Tips</a>
-        </nav>
+     
     </header>
 
 <main class="content-wrapper">
@@ -161,14 +155,19 @@
     </div>
 
     <footer>
-       <nav class="footer-nav">
-            <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
-        </nav>
-        <p>Made with <span style="color: red;">❤️</span> by Abubaker</p>
+  
     </footer>
 
-<script src="script.js"></script>
 
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('Service Worker registered ✅'))
+      .catch(err => console.error('Service Worker error:', err));
+  }
+</script>
+<script src="common.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
 

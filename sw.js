@@ -1,20 +1,21 @@
+// ========= Office Time Calculator PWA – Service Worker ==========
+// Version: v6
+// Features: Cache core assets, clean old cache, network-first for HTML, cache-first for others
 
-// ========= Office Time Calculator PWA – Service Worker v2 =========
-// Changelog:
-// - Cache name bumped to v2 to bust old cache
-// - Added self.skipWaiting() during install for immediate activation
-// - Added clients.claim() during activate to take control without reload
-// - Clean old caches more robustly
+const CACHE_NAME = 'office-time-calculator-cache-v10';
 
-const CACHE_NAME = 'office-time-calculator-cache-v6';
-
-// URLs to cache – extend this list as you add pages/assets
 const urlsToCache = [
-    '/',
+    '/',                     // root
     '/index.html',
     '/install.html',
     '/about.html',
+    '/contactus.html',
+    '/privacy.html',
+    '/terms.html',
+    '/tips.html',
     '/manifest.json',
+    '/maincss.css',
+    '/script.js',
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png'
 ];
@@ -29,8 +30,7 @@ self.addEventListener('install', (event) => {
             })
             .catch(err => console.error('[SW] Install cache error:', err))
     );
-    // Force this SW to become active immediately
-    self.skipWaiting();
+    self.skipWaiting(); // Immediate control
 });
 
 // ===== Activate =====
@@ -47,37 +47,31 @@ self.addEventListener('activate', (event) => {
             );
         })
     );
-    // Take control of clients ASAP
-    self.clients.claim();
+    self.clients.claim(); // Take control of clients
 });
 
 // ===== Fetch =====
 self.addEventListener('fetch', (event) => {
-    // Use network-first strategy for HTML pages to get latest UI
     if (event.request.mode === 'navigate' || event.request.destination === 'document') {
         event.respondWith(
             fetch(event.request)
                 .then(response => {
-                    // Clone and store in cache
                     const respClone = response.clone();
                     caches.open(CACHE_NAME).then(cache => cache.put(event.request, respClone));
                     return response;
                 })
                 .catch(() => caches.match(event.request))
         );
-        return;
-    }
-
-    // For other requests, try cache first
-    event.respondWith(
-        caches.match(event.request).then(cachedResp => {
-            return cachedResp || fetch(event.request).then(networkResp => {
-                // Cache the new resource
-                return caches.open(CACHE_NAME).then(cache => {
-                    cache.put(event.request, networkResp.clone());
-                    return networkResp;
+    } else {
+        event.respondWith(
+            caches.match(event.request).then(cachedResp => {
+                return cachedResp || fetch(event.request).then(networkResp => {
+                    return caches.open(CACHE_NAME).then(cache => {
+                        cache.put(event.request, networkResp.clone());
+                        return networkResp;
+                    });
                 });
-            });
-        })
-    );
+            })
+        );
+    }
 });

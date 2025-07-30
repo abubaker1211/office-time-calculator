@@ -569,6 +569,8 @@
                 startTime.setHours(hours, minutes, 0, 0);
             }
             inTime = startTime;
+    manualInTimeInput.style.display = 'none'; // Hide manual input when IN is clicked
+
             totalBreakDurationMinutes = 0;
             notificationSentForCurrentShift = false; // Reset notification status for new shift
             updateUI();
@@ -756,3 +758,15 @@
             });
         }
     
+
+function addReportWithConfirmation(actualOutTime) {
+    const today = new Date().toISOString().split("T")[0];
+    const exists = dailyReports.some(report => report.date === today);
+    if (exists) {
+        showConfirmation("A report already exists for today. Do you want to override it?", () => {
+            addReport(actualOutTime);
+        });
+    } else {
+        addReport(actualOutTime);
+    }
+}
