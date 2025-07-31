@@ -167,6 +167,8 @@
                 updateUI();
             }
             renderReports(); // Reports ko load hone par render karein
+            document.getElementById('todaySummary').style.display = 'none';
+
         }
 
         // --- Core Logic Functions ---
@@ -526,36 +528,42 @@
         }
 
         // Custom confirmation box dikhane ke liye
-        function showConfirmation(message, onConfirm) {
-            if (currentMessageBox) {
-                // Agar pehle se koi message box hai, toh use hata dein
-                document.body.removeChild(currentMessageBox);
-                currentMessageBox = null;
-            }
-
-            const confirmationBox = document.createElement('div');
-            confirmationBox.classList.add('custom-message-box'); // Add a class for styling
-            confirmationBox.innerHTML = `
-                <p>${message}</p>
-                <div style="margin-top: 15px;">
-                    <button id="confirmYes" style="background-color: #4CAF50;">Yes</button>
-                    <button id="confirmNo" style="background-color: #f44336;">No</button>
-                </div>
-            `;
-            document.body.appendChild(confirmationBox);
-            currentMessageBox = confirmationBox; // Store reference
-
-            confirmationBox.querySelector('#confirmYes').addEventListener('click', () => {
-                document.body.removeChild(confirmationBox);
-                currentMessageBox = null;
-                onConfirm();
-            });
-
-            confirmationBox.querySelector('#confirmNo').addEventListener('click', () => {
-                document.body.removeChild(confirmationBox);
-                currentMessageBox = null;
-            });
+       
+            function showConfirmation(message, onConfirm, onCancel) {
+        if (currentMessageBox) {
+            document.body.removeChild(currentMessageBox);
+            currentMessageBox = null;
         }
+
+        const confirmationBox = document.createElement('div');
+        confirmationBox.classList.add('custom-message-box');
+        confirmationBox.innerHTML = `
+            <p>${message}</p>
+            <div style="margin-top: 15px;">
+                <button id="confirmYes" style="background-color: #4CAF50;">Yes</button>
+                <button id="confirmNo" style="background-color: #f44336;">No</button>
+            </div>
+        `;
+        document.body.appendChild(confirmationBox);
+        currentMessageBox = confirmationBox;
+
+        confirmationBox.querySelector('#confirmYes').addEventListener('click', () => {
+            document.body.removeChild(confirmationBox);
+            currentMessageBox = null;
+            if (typeof onConfirm === 'function') {
+                onConfirm();
+            }
+        });
+
+        confirmationBox.querySelector('#confirmNo').addEventListener('click', () => {
+            document.body.removeChild(confirmationBox);
+            currentMessageBox = null;
+            if (typeof onCancel === 'function') {
+                onCancel(); // ✅ Now this will run when you click NO
+            }
+        });
+    }
+
 
 
         // --- Event Handlers ---
@@ -578,24 +586,69 @@
         });
 
         // OUT button click handler
+      function handleOut(actualOutTime) {
+    addReport(actualOutTime);
+
+    // Calculate work duration (exclude break)
+    const inTimeMs = inTime.getTime();
+    const outTimeMs = actualOutTime.getTime();
+    const totalShiftMs = outTimeMs - inTimeMs;
+    const totalBreakMs = totalBreakDurationMinutes * 60 * 1000;
+
+    let actualWorkMs = totalShiftMs - totalBreakMs;
+    if (actualWorkMs < 0) actualWorkMs = 0;
+
+    const actualWorkMinutes = Math.round(actualWorkMs / (1000 * 60));
+
+    showTodaySummary(actualWorkMinutes, Math.round(totalBreakDurationMinutes));
+    finalizeOut();
+}
+
+                
+        
+        
         outBtn.addEventListener('click', () => {
-            console.log('OUT button clicked.'); // Debugging log
-            if (isBreakOn) {
-                toggleBreak(); // Break ko end karein OUT karne se pehle
-            }
-            
-            const actualOutTime = new Date(); // Actual OUT time capture karein
-            addReport(actualOutTime); // Report add karein actual OUT time ke saath
+                    console.log('OUT button clicked.');
+
+                    if (isBreakOn) {
+                        toggleBreak(); // End break if active
+                    }
+
+                    const actualOutTime = new Date();
+                    const today = new Date().toISOString().split("T")[0];
+                    const reportExists = dailyReports.some(report => report.date === today);
+
+                    if (reportExists) {
+                        // Show confirmation to override or skip
+                        showConfirmation("A report already exists for today. Do you want to override it?", () => {
+                            // ✅ YES: override and OUT
+                            handleOut(actualOutTime);
+                        }, () => {
+                            // ❌ NO: don't override, but still perform OUT cleanup
+                            finalizeOut();
+                        });
+                        return;
+                    }
+
+                    // No report exists, proceed normally
+                    handleOut(actualOutTime);
+                });
+
+
+            // Report add karein actual OUT time ke saath
 
             // Naye din ke liye state reset karein
-            inTime = null;
-            totalBreakDurationMinutes = 0;
-            currentShiftOutTime = null;
-            manualInTimeInput.value = '';
-            notificationSentForCurrentShift = false; // Reset notification status
-            updateUI();
-            saveState();
-        });
+                function finalizeOut() {
+                inTime = null;
+                totalBreakDurationMinutes = 0;
+                currentShiftOutTime = null;
+                manualInTimeInput.value = '';
+                notificationSentForCurrentShift = false;
+                manualInTimeInput.style.display = 'inline-block';
+                updateUI();
+                saveState();
+            }
+    
 
         // Break toggle handler
         function toggleBreak() {
@@ -770,3 +823,23 @@ function addReportWithConfirmation(actualOutTime) {
         addReport(actualOutTime);
     }
 }
+
+function showTodaySummary(workMinutes, breakMinutes) {
+    const summaryBox = document.getElementById('todaySummary');
+    const summaryText = document.getElementById('todayWorkSummary');
+
+    const hours = Math.floor(workMinutes / 60);
+    const minutes = workMinutes % 60;
+
+    const breakHrs = Math.floor(breakMinutes / 60);
+    const breakMins = breakMinutes % 60;
+
+    summaryText.textContent = `🕒 Worked: ${hours}h ${minutes}m • ☕ Break: ${breakHrs}h ${breakMins}m`;
+    summaryBox.style.display = 'block';
+
+    // ⏱️ Auto-hide after 10 seconds
+    setTimeout(() => {
+        summaryBox.style.display = 'none';
+    }, 10000); // 10 seconds = 10000ms
+}
+
