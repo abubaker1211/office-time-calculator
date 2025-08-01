@@ -871,3 +871,17 @@ if ('serviceWorker' in navigator) {
         }
     });
 }
+
+
+document.getElementById("shareBtn").addEventListener("click", () => {
+ const message = `✅ Check out this awesome 
+ *Office Time Tracker web app!*
+Track your shift, breaks, and more in real-time.
+
+👉 Try it here: https://officetimecalculator.netlify.app`;
+const encodedMessage = encodeURIComponent(message);
+const url = `https://wa.me/?text=${encodedMessage}`;
+window.open(url, "_blank");
+
+});
+

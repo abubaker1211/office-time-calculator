@@ -1366,3 +1366,19 @@ body:not(.dark) #todaySummary {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     padding: 15px;
 }
+
+.whatsapp-share {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  margin-bottom: 2rem;            /* More space below to avoid overlap */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
