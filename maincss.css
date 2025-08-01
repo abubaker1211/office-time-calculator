@@ -1337,3 +1337,32 @@ body.dark .filter-sort-controls button:hover {
     background-color: #42a5f5; /* Darker primary accent on hover */
     box-shadow: 0 3px 5px rgba(0,0,0,0.3);
 }
+
+#todaySummary {
+    display: none;
+    margin-bottom: 2rem;            /* More space below to avoid overlap */
+    padding: 1rem;
+    background-color: #e0f7fa;
+    border-radius: 8px;
+    text-align: center;             /* Center text */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);  /* Optional: soft shadow */
+}
+
+/* Today Summary Styling in Dark Mode */
+body.dark #todaySummary {
+    background-color: #2e3b4e;
+    color: #ffffff;
+    border: 1px solid #4c5a6b;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+}
+
+
+
+/* Today Summary Styling in Light Mode (optional for consistency) */
+body:not(.dark) #todaySummary {
+    border-radius: 12px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}

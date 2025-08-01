@@ -101,6 +101,14 @@
             return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
         }
 
+        // Total minutes ko HH:MM format mein format karein (Reports ke liye)
+        function formatMinutesToHHMM(minutes) {
+            const hrs = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
+        }
+
+
         // --- Local Storage Functions ---
 
         // App state ko Local Storage mein save karein
@@ -444,7 +452,7 @@
                         <strong>Date: ${report.date}</strong><br>
                         <span>IN: ${report.inTime}, OUT: ${report.outTime}</span><br>
                         <span>Shift: ${report.shiftDurationHours} hrs, Break: ${report.totalBreakMinutes} mins</span><br>
-                        <span>Actual Work: ${report.actualWorkDurationMinutes} mins</span>
+                        <span>Actual Work: ${formatMinutesToHHMM(report.actualWorkDurationMinutes)} hrs</span>
                     `;
                     reportsList.appendChild(listItem);
                 });
@@ -843,3 +851,23 @@ function showTodaySummary(workMinutes, breakMinutes) {
     }, 10000); // 10 seconds = 10000ms
 }
 
+
+
+// ✅ Update Check: Reload if new SW available
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(reg => {
+        if (reg) {
+            reg.update(); // Force check for update
+            reg.addEventListener('updatefound', () => {
+                const newSW = reg.installing;
+                newSW.addEventListener('statechange', () => {
+                    if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+                        if (confirm("A new version of the app is available. Reload now?")) {
+                            window.location.reload();
+                        }
+                    }
+                });
+            });
+        }
+    });
+}
