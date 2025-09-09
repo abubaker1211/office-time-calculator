@@ -30,9 +30,7 @@
 <!-- Dark Mode Toggle Button and View Reports Button in a flex container -->
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
 <!-- View Reports Button (Moved here) -->
-<button class="btn-reset" id="viewReportsBtn">
-                View Reports
-            </button>
+<button class="btn-reset" id="viewReportsBtn" onclick="window.location.href='reports.html'">View Reports</button>
 <!-- Dark Mode Toggle Button -->
 <button id="darkModeToggle" style="background-color: #cfd8dc; color: #546e7a; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;">
 <span id="darkModeIcon">🌙</span>
@@ -40,12 +38,15 @@
 </div>
 <!-- Shift Duration Input -->
 <div style="margin-bottom: 1.5rem;">
-<label for="shiftDuration">Your Shift Duration (in hours):</label>
-<input id="shiftDuration" max="12" min="1" type="number" value="9"/>
+  <label for="shiftDuration">Your Shift Duration (in hours):</label>
+  <div class="input-flex-wrapper">
+    <input id="shiftDuration" max="12" min="1" type="number" value="9" disabled />
+    <button class="btn-reset" id="confirmShiftBtn" disabled>OK</button>
+  </div>
 </div>
 <!-- Manual IN Time Input with Reset Button -->
 <div style="margin-bottom: 1.5rem;"> <!-- Wrapper div for margin -->
-<label for="manualInTime">Manual IN Time (Optional):</label>
+<label for="manualInTime">Missed hitting IN button? <br>Manually input IN Time and Hit IN:</label>
 <div class="input-flex-wrapper"> <!-- New wrapper for input and button -->
 <input id="manualInTime" type="time"/>
 <button class="btn-reset" id="resetManualInTimeBtn">Reset</button>
@@ -58,11 +59,27 @@
 </div>
 <!-- Break Toggle Button -->
 <div style="margin-bottom: 1.5rem; text-align: center;">
-<p class="break-status-text" style="margin-bottom: 0.5rem; font-weight: bold;">Break Status:</p>
-<button class="btn-toggle off" disabled="" id="breakToggleBtn">
-                Break OFF
-            </button>
-<p id="breakTimer" style="font-size: 1.2rem; font-weight: bold; margin-top: 0.75rem; display: none;">00:00:00</p>
+    <p class="break-status-text" style="margin-bottom: 0.5rem; font-weight: bold;">Break Status: <span id="breakStatusText">OFF</span></p>
+    <div class="toggle-container" style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+        <button class="btn-toggle off" disabled="" id="breakToggleBtn">
+            Break OFF
+        </button>
+        <div id="breakSwitch" class="switch off">
+            <div class="slider"></div>
+        </div>
+    </div>
+     <!-- Timers are now here, directly below the button/switch -->
+    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;">
+        <div>
+            <p style="font-weight: bold; margin-bottom: 0.2rem;">IN Timer:</p>
+            <p id="inTimerDisplay" style="font-size: 1.2rem; font-weight: bold;">00:00:00</p>
+        </div>
+        <div>
+            <p style="font-weight: bold; margin-bottom: 0.2rem;">Break Timer:</p>
+            <p id="breakTimer" style="font-size: 1.2rem; font-weight: bold; display: none;">00:00:00</p>
+        </div>
+    </div>
+
 </div>
 <!-- Current Status / Leaving Time Display -->
 <div class="status-box">
@@ -88,31 +105,7 @@
 </div>
 </div>
 </div>
-<!-- Reports Section (New) -->
- 
-<div class="content-wrapper" id="reportsSection">
-<h2>Daily Work Reports</h2>
-<!-- Filter and Sort Controls -->
-<div class="filter-sort-controls">
-<label for="sortReports">Sort by:</label>
-<select id="sortReports">
-<option value="dateDesc">Date (Newest First)</option>
-<option value="dateAsc">Date (Oldest First)</option>
-<option value="workDurationDesc">Actual Work (Longest First)</option>
-<option value="workDurationAsc">Actual Work (Shortest First)</option>
-</select>
-<label for="filterStartDate">From:</label>
-<input id="filterStartDate" type="date"/>
-<label for="filterEndDate">To:</label>
-<input id="filterEndDate" type="date"/>
-<button id="applyFilterSortBtn">Apply</button>
-</div>
-<ul id="reportsList">
-<li id="noReportsMessage">No reports yet.</li>
-</ul>
-<button id="clearAllReportsBtn">Clear All Reports</button>
-<button class="btn-reset" id="exportReportsBtn" style="background-color: #4CAF50; margin-top: 1rem;">Export to CSV</button>
-</div>
+
 <!-- Banner Ad Placeholders -->
 <div class="ad-placeholder">
 <div class="ad-content-placeholder productivity-tips">
@@ -157,12 +150,20 @@
     <p>Install now to take your productivity to the next level!</p>
     <a href="#" class="placeholder-link">Learn More About PWA &rarr;</a>
 </div>
+
+<div class="tutorial-overlay" id="tutorialOverlay"></div>
+<div class="tutorial-message-box" id="tutorialMessageBox">
+    <p id="tutorialMessageText"></p>
+    <div class="button-group">
+        <button id="tutorialSkipBtn">Skip</button>
+        <button id="tutorialNextBtn">Next</button>
+    </div>
+</div>
+
+
 </section>
 </main>
-<!-- Scroll Message (New) -->
-<div id="scrollMessage">
-        Scroll down to view reports
-    </div>
+
 
     <footer>
   
@@ -178,8 +179,12 @@
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4157122551548487"
      crossorigin="anonymous"></script>
-<script src="common.js"></script>
 <script src="script.js"></script>
+<script src="common.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4157122551548487"
+     crossorigin="anonymous"></script>
+
+
 </body>
 </html>
 

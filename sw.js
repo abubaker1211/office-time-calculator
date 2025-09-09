@@ -2,7 +2,7 @@
 // Version: v6
 // Features: Cache core assets, clean old cache, network-first for HTML, cache-first for others
 
-const CACHE_NAME = 'office-time-calculator-cache-v33';
+const CACHE_NAME = 'office-time-calculator-cache-v122';
 
 const urlsToCache = [
     '/',                     // root

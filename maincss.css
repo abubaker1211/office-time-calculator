@@ -1,1384 +1,1815 @@
-/* Refined Professional Color Palette:
-    Light Mode:
-    Body Background: #f5f7fa (Very Light Blue-Grey)
-    Container Background: #ffffff (White)
-    Primary Accent (Buttons/Headings): #3f51b5 (Indigo)
-    Secondary Text/Labels: #546e7a (Blue Grey)
-    Input Background: #eceff1 (Light Blue Grey)
-    Input Border: #cfd8dc (Lighter Blue Grey)
-    Status Box Background: #e8f5e9 (Light Green)
-    Status Text: #388e3c (Dark Green)
-    Ad Placeholder: #eceff1 (Light Blue Grey)
+    /* Refined Professional Color Palette:
+        Light Mode:
+        Body Background: #f5f7fa (Very Light Blue-Grey)
+        Container Background: #ffffff (White)
+        Primary Accent (Buttons/Headings): #3f51b5 (Indigo)
+        Secondary Text/Labels: #546e7a (Blue Grey)
+        Input Background: #eceff1 (Light Blue Grey)
+        Input Border: #cfd8dc (Lighter Blue Grey)
+        Status Box Background: #e8f5e9 (Light Green)
+        Status Text: #388e3c (Dark Green)
+        Ad Placeholder: #eceff1 (Light Blue Grey)
 
-    Dark Mode:
-    Body Background: #2c3e50 (Dark Blue-Grey)
-    Container Background: #34495e (Medium Dark Blue-Grey)
-    Primary Accent (Buttons/Headings): #64b5f6 (Light Blue)
-    Secondary Text/Labels: #b0bec5 (Lighter Blue Grey)
-    Input Background: #455a64 (Darker Blue Grey)
-    Input Border: #607d8b (Blue Grey)
-    Status Box Background: #455a64 (Darker Blue Grey)
-    Status Text: #b0bec5 (Lighter Blue Grey)
-    Ad Placeholder: #455a64 (Darker Blue Grey)
+        Dark Mode:
+        Body Background: #2c3e50 (Dark Blue-Grey)
+        Container Background: #34495e (Medium Dark Blue-Grey)
+        Primary Accent (Buttons/Headings): #64b5f6 (Light Blue)
+        Secondary Text/Labels: #b0bec5 (Lighter Blue Grey)
+        Input Background: #455a64 (Darker Blue Grey)
+        Input Border: #607d8b (Blue Grey)
+        Status Box Background: #455a64 (Darker Blue Grey)
+        Status Text: #b0bec5 (Lighter Blue Grey)
+        Ad Placeholder: #455a64 (Darker Blue Grey)
 
-    Common:
-    IN Button: Primary Accent Blue
-    OUT Button: Secondary Text/Label Grey
-    Break ON: Green
-    Break OFF: Red
-    Reset Button: Secondary Text/Label Grey
-*/
+        Common:
+        IN Button: Primary Accent Blue
+        OUT Button: Secondary Text/Label Grey
+        Break ON: Green
+        Break OFF: Red
+        Reset Button: Secondary Text/Label Grey
+    */
 
-/* CSS Variables for easier theme management */
-:root {
-    --body-bg: #f5f7fa;
-    --container-bg: #ffffff;
-    --primary-accent: #3f51b5;
-    --secondary-text: #546e7a;
-    --secondary-text-label: #546e7a;
-    --input-bg: #eceff1;
-    --input-border: #cfd8dc;
-    --status-box-bg: #e8f5e9;
-    --status-text-color: #388e3c;
-    --status-display-text-color: #1b5e20;
-    --ad-placeholder-bg: #eceff1;
-    --ad-placeholder-border: #cfd8dc;
-}
+    /* CSS Variables for easier theme management */
+    :root {
+        --body-bg: #f5f7fa;
+        --container-bg: #ffffff;
+        --primary-accent: #3f51b5;
+        --secondary-text: #546e7a;
+        --secondary-text-label: #546e7a;
+        --input-bg: #eceff1;
+        --input-border: #cfd8dc;
+        --status-box-bg: #e8f5e9;
+        --status-text-color: #388e3c;
+        --status-display-text-color: #1b5e20;
+        --ad-placeholder-bg: #eceff1;
+        --ad-placeholder-border: #cfd8dc;
+    }
 
-body.dark {
-    --body-bg: #2c3e50;
-    --container-bg: #34495e;
-    --primary-accent: #64b5f6;
-    --secondary-text: #e0e0e0;
-    --secondary-text-label: #b0bec5;
-    --input-bg: #455a64;
-    --input-border: #607d8b;
-    --status-box-bg: #455a64;
-    --status-text-color: #b0bec5;
-    --status-display-text-color: #64b5f6; /* Changed for dark mode */
-    --ad-placeholder-bg: #455a64;
-    --ad-placeholder-border: #607d8b;
-}
+    body.dark {
+        --body-bg: #2c3e50;
+        --container-bg: #34495e;
+        --primary-accent: #64b5f6;
+        --secondary-text: #e0e0e0;
+        --secondary-text-label: #b0bec5;
+        --input-bg: #455a64;
+        --input-border: #607d8b;
+        --status-box-bg: #455a64;
+        --status-text-color: #b0bec5;
+        --status-display-text-color: #64b5f6; /* Changed for dark mode */
+        --ad-placeholder-bg: #455a64;
+        --ad-placeholder-border: #607d8b;
+    }
 
-/* Global Body Styling - Replicated from index.html inline class */
-body {
-    font-family: sans-serif;
-    background-color: var(--body-bg); /* Use variable */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* This might push footer too far if content is short */
-    min-height: 100vh;
-    padding: 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    color: var(--secondary-text); /* Default text color from palette */
-}
+    /* Global Body Styling - Replicated from index.html inline class */
+    body {
+        font-family: sans-serif;
+        background-color: var(--body-bg); /* Use variable */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* This might push footer too far if content is short */
+        min-height: 100vh;
+        padding: 1rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        color: var(--secondary-text); /* Default text color from palette */
+    }
 
-/* Base Container Styling */
-.container {
-    background-color: var(--container-bg); /* Use variable */
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
+    /* Base Container Styling */
+    .container {
+        background-color: var(--container-bg); /* Use variable */
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-h1 {
-    font-size: 2rem;
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: var(--primary-accent); /* Use variable */
+        transition: color 0.3s ease;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: var(--secondary-text-label); /* Use variable */
+        text-align: left;
+        transition: color 0.3s ease;
+    }
+
+    input[type="number"],
+    input[type="time"] {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--input-border); /* Use variable */
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        color: var(--secondary-text); /* Input text color from palette */
+        background-color: var(--input-bg); /* Use variable */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    #shiftDuration { /* Specific style for shift duration input - now full width */
+        width: 100%;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: normal;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    input[type="number"]:focus,
+    input[type="time"]:focus {
+        outline: none;
+        border-color: var(--primary-accent); /* Use variable */
+        box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+    }
+
+    .input-flex-wrapper {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .input-flex-wrapper input {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-around;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .main-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 0.75rem;
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        flex: 1;
+    }
+
+    .main-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Professional Colors for IN/OUT Buttons */
+    .btn-in {
+        background-color: var(--primary-accent); /* Use variable */
+    }
+
+    .btn-in:hover {
+        background-color: #303f9f; /* Darker Indigo */
+    }
+
+    .btn-out {
+        background-color: var(--secondary-text-label); /* Use variable (Blue Grey) */
+    }
+
+    .btn-out:hover {
+        background-color: #37474f; /* Darker Blue Grey */
+    }
+
+    .btn-reset {
+        background-color: #90a4ae; /* Blue Grey */
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-reset:hover {
+        background-color: #78909c; /* Darker Blue Grey */
+        transform: translateY(-1px);
+        box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+    }
+
+    /* Professional Colors for Break Toggle Button */
+    .btn-toggle {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 0.75rem;
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-toggle.on {
+        background-color: #4CAF50; /* Green for ON */
+    }
+
+    .btn-toggle.on:hover {
+        background-color: #388E3C; /* Darker Green */
+    }
+
+    .btn-toggle.off {
+        background-color: #f44336; /* Red for OFF */
+    }
+
+    .btn-toggle.off:hover {
+        background-color: #d32f2f; /* Darker Red */
+    }
+
+    .status-box {
+        background-color: var(--status-box-bg); /* Use variable */
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-top: 2rem;
+        color: var(--status-text-color); /* Use variable */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .status-box p {
+        margin-bottom: 0.5rem;
+        color: var(--status-text-color); /* Use variable */
+        transition: color 0.3s ease;
+    }
+
+    /* Increased font size for status and leaving time */
+    .status-box .display-text {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--status-display-text-color); /* Use variable */
+        transition: color 0.3s ease;
+    }
+
+    .status-box .large-text {
+        font-size: 3rem;
+        font-weight: bolder;
+        color: var(--status-display-text-color); /* Use variable */
+        transition: color 0.3s ease;
+    }
+
+    .ad-placeholder {
+        background-color: var(--ad-placeholder-bg); /* Use variable */
+        border: 1px dashed var(--ad-placeholder-border); /* Use variable */
+        border-radius: 0.5rem;
+        padding: 1rem;
+        text-align: center;
+        color: var(--secondary-text-label); /* Use variable */
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    /* Reports Section specific styles */
+    #reportsSection {
+        background-color: var(--container-bg);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        //width: 100%;
+        //max-width: 400px;
+        text-align: center;
+        margin-top: 2rem;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        color: var(--secondary-text);
+    }
+
+    #reportsSection h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary-accent);
+    }
+
+    #reportsList {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid var(--input-border);
+        border-radius: 0.5rem;
+        background-color: var(--input-bg);
+        padding: 0.5rem;
+    }
+
+    #reportsList li {
+        background-color: var(--body-bg);
+        margin-bottom: 0.5rem;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        text-align: left;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        font-size: 0.9rem;
+        color: var(--secondary-text-label);
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    #reportsList li strong {
+        color: var(--primary-accent);
+    }
+
+    #reportsList li span {
+        font-size: 0.85rem;
+        color: var(--secondary-text-label);
+    }
+
+    #reportsList li:last-child {
+        margin-bottom: 0;
+    }
+
+    #noReportsMessage {
+        color: var(--secondary-text-label);
+        font-style: italic;
+        margin-top: 1rem;
+    }
+
+    #clearAllReportsBtn {
+        background-color: #f44336;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        margin-top: 1.5rem;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #clearAllReportsBtn:hover {
+        background-color: #d32f2f;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+    }
+
+    /* View Reports button styling */
+    #viewReportsBtn {
+        background-color: var(--primary-accent);
+        color: white;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #viewReportsBtn:hover {
+        background-color: #303f9f;
+    }
+
+    /* Small date text styling */
+    .small-date-text {
+        font-size: 0.75rem;
+        color: var(--secondary-text-label);
+        transition: color 0.3s ease;
+    }
+
+    /* Scroll message styling */
+    #scrollMessage {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        font-size: 0.9rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    }
+
+    #scrollMessage.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Message box styling (for showMessage and showConfirmation) */
+    .custom-message-box {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--container-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        text-align: center;
+        color: var(--secondary-text);
+        font-weight: bold;
+        max-width: 80%;
+    }
+
+    .custom-message-box button {
+        margin-top: 15px;
+        padding: 8px 15px;
+        background-color: var(--primary-accent);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .custom-message-box #confirmYes {
+        background-color: #4CAF50;
+        margin-right: 10px;
+    }
+
+    .custom-message-box #confirmNo {
+        background-color: #f44336;
+    }
+
+    /* Filter and Sort controls styling */
+    .filter-sort-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        background-color: var(--input-bg);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .filter-sort-controls label {
+        font-weight: normal;
+        color: var(--secondary-text-label);
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .filter-sort-controls select,
+    .filter-sort-controls input[type="date"] {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.5rem;
+        border: 1px solid var(--input-border);
+        border-radius: 0.5rem;
+        background-color: var(--container-bg);
+        color: var(--secondary-text);
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .filter-sort-controls select:focus,
+    .filter-sort-controls input[type="date"]:focus {
+        outline: none;
+        border-color: var(--primary-accent);
+        box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+    }
+
+    .filter-sort-controls button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+        font-weight: bold;
+        border-radius: 0.5rem;
+        border: none;
+        color: white;
+        background-color: #3f51b5;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .filter-sort-controls button:hover {
+        background-color: #303f9f;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+    }
+
+    /* Notification settings styling */
+    .notification-settings {
+        background-color: var(--input-bg);
+        padding: 1rem;
+        border-radius: 0.75rem;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        margin-top: 1.5rem;
+        text-align: left;
+        color: var(--secondary-text-label);
+    }
+
+    .notification-settings div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .notification-settings label {
+        margin-bottom: 0;
+        margin-right: 10px;
+        font-weight: normal;
+    }
+
+    .notification-settings input[type="checkbox"] {
+        margin-right: 5px;
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    .notification-settings input[type="number"] {
+        width: 80px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    /* General styling for the notification-settings container (REDUNDANT) */
+    /* This block duplicates the .notification-settings and h3 rules above. */
+    /* Keeping it here for now as per your provided file, but it should be merged. */
+    .notification-settings {
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #ffffff; /* This specific color will override var(--input-bg) in light mode */
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .notification-settings h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+    /* End of REDUNDANT block */
+
+
+    /* Styles for individual setting rows within notification-settings (REDUNDANT) */
+    /* This block also duplicates styles from above. */
+    .notification-settings > div {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #enableNotificationsCheckbox {
+        margin-right: 8px;
+        transform: scale(1.2);
+    }
+
+    .notification-settings label {
+        font-size: 1em;
+        color: #555; /* This specific color will override var(--secondary-text-label) in light mode */
+        flex-shrink: 0;
+    }
+
+    #reminderMinutesInput {
+        width: 60px;
+        padding: 8px;
+        border: 1px solid #ccc; /* This specific color will override var(--input-border) in light mode */
+        border-radius: 4px;
+        text-align: center;
+        font-size: 1em;
+        -moz-appearance: textfield;
+    }
+
+    #reminderMinutesInput::-webkit-outer-spin-button,
+    #reminderMinutesInput::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* End of REDUNDANT block */
+
+
+    /* Media Query for very small screens */
+    @media (max-width: 400px) {
+        .notification-settings > div {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    /* Base styles for all content placeholders */
+    .ad-content-placeholder {
+        margin: 20px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .ad-content-placeholder:hover {
+        transform: translateY(-5px);
+    }
+
+    .ad-content-placeholder h3 {
+        font-size: 1.5em;
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: #4a4a8a; /* Blue/purple for headings (needs to be var) */
+    }
+
+    .ad-content-placeholder p {
+        font-size: 1em;
+        color: #555; /* Standard text color (needs to be var) */
+        margin-bottom: 15px;
+    }
+
+    .ad-content-placeholder ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .ad-content-placeholder ul li {
+        font-size: 0.95em;
+        color: #666; /* List item text color (needs to be var) */
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .ad-content-placeholder ul li:before {
+        content: '✅';
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .placeholder-link {
+        display: inline-block;
+        background-color: #6a6ad0; /* Button-like link (needs to be var) */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .placeholder-link:hover {
+        background-color: #5a5ab0; /* Darker hover effect (needs to be var) */
+    }
+
+    /* Specific styles for each placeholder type */
+
+    .productivity-tips {
+        background-color: #e6f7ff; /* Light blue (needs to be var) */
+        border: 1px solid #b3e0ff; /* (needs to be var) */
+    }
+    .productivity-tips h3 {
+        color: #007bff; /* (needs to be var) */
+    }
+
+    .user-testimonials {
+        background-color: #f0f8ff; /* (needs to be var) */
+        border: 1px solid #cceeff; /* (needs to be var) */
+    }
+    .user-testimonials h3 {
+        color: #ff9800; /* (needs to be var) */
+    }
+    .user-testimonials .testimonial-item {
+        background-color: #ffffff; /* (needs to be var) */
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #eee; /* (needs to be var) */
+        text-align: left;
+    }
+    .user-testimonials .testimonial-item p {
+        margin-bottom: 5px;
+    }
+    .user-testimonials .testimonial-item .author {
+        font-style: italic;
+        font-size: 0.9em;
+        text-align: right;
+        color: #777; /* (needs to be var) */
+    }
+
+    .pwa-features {
+        background-color: #eaffe6; /* (needs to be var) */
+        border: 1px solid #c6f6c6; /* (needs to be var) */
+    }
+    .pwa-features h3 {
+        color: #28a745; /* (needs to be var) */
+    }
+
+
+    /* --- Dark Mode Adjustments for generic classes --- */
+    /* Your current setup uses body.dark for main app and body.dark-mode for ad-placeholders.
+    We need to standardize this to body.dark */
+
+    body.dark .ad-content-placeholder { /* Changed from body.dark-mode */
+        background-color: var(--ad-placeholder-bg); /* Use variable */
+        border: 1px solid var(--ad-placeholder-border); /* Use variable */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark .ad-content-placeholder h3 { /* Changed from body.dark-mode */
+        color: var(--primary-accent); /* Use variable */
+    }
+
+    body.dark .ad-content-placeholder p,
+    body.dark .ad-content-placeholder ul li { /* Changed from body.dark-mode */
+        color: var(--secondary-text); /* Use variable */
+    }
+
+    body.dark .placeholder-link { /* Changed from body.dark-mode */
+        background-color: var(--primary-accent); /* Use variable */
+    }
+
+    body.dark .placeholder-link:hover { /* Changed from body.dark-mode */
+        background-color: #42a5f5; /* Darker primary accent on hover (dark mode) */
+    }
+
+    /* Dark mode specific for testimonial items */
+    body.dark .user-testimonials .testimonial-item { /* Changed from body.dark-mode */
+        background-color: var(--body-bg); /* Use variable */
+        border: 1px solid var(--input-border); /* Use variable */
+    }
+
+    body.dark .user-testimonials .testimonial-item .author { /* Changed from body.dark-mode */
+        color: var(--secondary-text-label); /* Use variable */
+    }
+
+    /* Adjust specific placeholder backgrounds for dark mode */
+    body.dark .productivity-tips { /* Changed from body.dark-mode */
+        background-color: var(--ad-placeholder-bg); /* Use variable */
+        border: 1px solid var(--ad-placeholder-border); /* Use variable */
+    }
+    body.dark .productivity-tips h3 { /* Changed from body.dark-mode */
+        color: var(--primary-accent); /* Use variable */
+    }
+
+    body.dark .user-testimonials { /* Changed from body.dark-mode */
+        background-color: var(--ad-placeholder-bg); /* Use variable */
+        border: 1px solid var(--ad-placeholder-border); /* Use variable */
+    }
+    body.dark .user-testimonials h3 { /* Changed from body.dark-mode */
+        color: var(--primary-accent); /* Use variable */
+    }
+
+    body.dark .pwa-features { /* Changed from body.dark-mode */
+        background-color: var(--ad-placeholder-bg); /* Use variable */
+        border: 1px solid var(--ad-placeholder-border); /* Use variable */
+    }
+    body.dark .pwa-features h3 { /* Changed from body.dark-mode */
+        color: var(--primary-accent); /* Use variable */
+    }
+
+
+    /* --- Additional Styles for tips.html (Matching existing UI) --- */
+
+    /* General page section styling (for content-wrapper) */
+    .content-wrapper {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: var(--container-bg);
+        border-radius: 1rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        color: var(--secondary-text);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    }
+
+    /* Page heading for tips.html */
+    .page-section h1 {
+        text-align: center;
+        color: var(--primary-accent);
+        margin-bottom: 30px;
+        font-size: 2rem;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    /* Paragraphs within the tips page */
+    .page-section p {
+        margin-bottom: 15px;
+        line-height: 1.7;
+        color: var(--secondary-text);
+        transition: color 0.3s ease;
+    }
+
+    /* Styling for individual Tip Cards */
+    .tip-card {
+        background-color: var(--body-bg); /* Using body background for cards within content-wrapper */
+        border: 1px solid var(--input-border);
+        border-radius: 0.75rem;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        color: var(--secondary-text);
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .tip-card h2 {
+        color: var(--primary-accent);
+        font-size: 1.4em;
+        margin-top: 0;
+        margin-bottom: 10px;
+        transition: color 0.3s ease;
+    }
+
+    .tip-card ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    .tip-card ul li {
+        margin-bottom: 8px;
+        color: var(--secondary-text);
+        position: relative;
+        padding-left: 25px;
+        transition: color 0.3s ease;
+    }
+
+    .tip-card ul li:before {
+        content: '✅';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1.1em;
+        line-height: 1.5;
+    }
+
+    /* Styling for the "Back to App" button on tips.html */
+    .back-to-app-link {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .back-to-app-link .button {
+        background-color: var(--primary-accent);
+        color: white;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 0.75rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .back-to-app-link .button:hover {
+        background-color: #303f9f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Navigation bar styling (for header in all pages) */
+    header {
+        max-width: 900px;
+        /* max-width: 400px; /* Removed max-width from header for full width design */
+        margin: 0 auto 1.5rem auto; /* Top/Bottom margin, auto left/right for centering */
+        padding: 0.75rem 1rem;
+        background-color: var(--container-bg);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Matched main button shadow */
+        border-radius: 1rem; /* Matched container border-radius */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+    .main-nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        font-weight: bold;
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: var(--primary-accent);
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: var(--primary-accent);
+        color: white;
+    }
+
+    /* Footer styling */
+    footer {
+        width: 100%;
+        padding: 1rem;
+        margin-top: 20px;
+        background-color: var(--container-bg);
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+        text-align: center;
+        color: var(--secondary-text-label);
+        font-size: 0.9em;
+        border-radius: 1rem 1rem 0 0;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-nav {
+        margin-top: 10px;
+    }
+
+    .footer-nav a {
+        color: var(--secondary-text-label);
+        text-decoration: none;
+        margin: 0 8px;
+        transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+        color: var(--primary-accent);
+    }
+
+    /* --- Dark Mode Overrides for all elements that use variables --- */
+    /* These use body.dark which is controlled by script.js */
+
+    body.dark .main-button {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    body.dark .main-button:hover {
+        box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+    }
+    body.dark .btn-in {
+        background-color: var(--primary-accent);
+    }
+    body.dark .btn-in:hover {
+        background-color: #42a5f5; /* Darker version of dark mode primary accent */
+    }
+    body.dark .btn-out {
+        background-color: var(--secondary-text-label);
+    }
+    body.dark .btn-out:hover {
+        background-color: #78909c;
+    }
+    body.dark .btn-reset {
+        background-color: #90a4ae;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    body.dark .btn-reset:hover {
+        box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    }
+    body.dark .btn-toggle {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    body.dark .btn-toggle.on {
+        background-color: #66bb6a;
+    }
+    body.dark .btn-toggle.on:hover {
+        background-color: #43a047;
+    }
+    body.dark .btn-toggle.off {
+        background-color: #ef5350;
+    }
+    body.dark .btn-toggle.off:hover {
+        background-color: #e53935;
+    }
+    body.dark #darkModeToggle {
+        background-color: var(--input-border); /* Use input border for toggle */
+        color: var(--secondary-text); /* Use secondary text for icon */
+    }
+
+    body.dark #viewReportsBtn {
+        background-color: var(--primary-accent);
+    }
+    body.dark #viewReportsBtn:hover {
+        background-color: #42a5f5;
+    }
+    body.dark #clearAllReportsBtn {
+        background-color: #ef5350;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    body.dark #clearAllReportsBtn:hover {
+        background-color: #e53935;
+        box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    }
+
+    body.dark .filter-sort-controls select,
+    body.dark .filter-sort-controls input[type="date"] {
+        background-color: var(--container-bg);
+        color: var(--secondary-text);
+        border-color: var(--input-border);
+    }
+
+    body.dark .filter-sort-controls button {
+        background-color: var(--primary-accent);
+    }
+
+    body.dark .filter-sort-controls button:hover {
+        background-color: #42a5f5;
+    }
+    /* IMPORTANT: The body.dark .notification-settings and ad-content-placeholder rules below
+    need to be simplified and ensure they are picking up colors from variables correctly.
+    Also, the redundant notification-settings blocks are problematic. */
+
+    /* === Consolidated and Fixed Notification Settings Styles === */
+    /* Remove all previous .notification-settings blocks and replace with this */
+
+    .notification-settings {
+        background-color: var(--input-bg); /* Use variable */
+        padding: 1rem; /* Adjust as needed */
+        border-radius: 0.75rem; /* Consistent border-radius */
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        margin-top: 1.5rem;
+        text-align: left;
+        color: var(--secondary-text-label); /* Use variable */
+        margin-bottom: 20px; /* Added margin for separation */
+        transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .notification-settings h3 {
+        font-weight: bold;
+        margin-bottom: 1rem; /* Adjusted margin */
+        color: var(--primary-accent); /* Use variable */
+        transition: color 0.3s ease;
+    }
+
+    .notification-settings div { /* For individual setting rows */
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap; /* Ensure responsiveness */
+        gap: 10px; /* Space between elements in a row */
+    }
+
+    .notification-settings label {
+        margin-bottom: 0;
+        margin-right: 10px;
+        font-weight: normal;
+        color: var(--secondary-text-label); /* Use variable */
+    }
+
+    .notification-settings input[type="checkbox"] {
+        margin-right: 5px;
+        width: auto;
+        margin-bottom: 0;
+        transform: scale(1.2); /* Make checkbox slightly larger for touch */
+    }
+
+    .notification-settings input[type="number"] {
+        width: 80px; /* Smaller width for minutes input */
+        padding: 8px; /* Consistent padding */
+        border: 1px solid var(--input-border); /* Use variable */
+        border-radius: 4px;
+        text-align: center;
+        font-size: 1em;
+        -moz-appearance: textfield;
+        margin-bottom: 0;
+        background-color: var(--container-bg); /* Input background from container-bg */
+        color: var(--secondary-text); /* Input text color */
+    }
+
+    /* Hide default number input arrows in WebKit browsers */
+    .notification-settings input[type="number"]::-webkit-outer-spin-button,
+    .notification-settings input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Dark mode for notification settings */
+    body.dark .notification-settings {
+        background-color: var(--input-bg); /* Dark mode input background */
+        color: var(--secondary-text-label);
+    }
+    body.dark .notification-settings h3 {
+        color: var(--primary-accent);
+    }
+    body.dark .notification-settings label {
+        color: var(--secondary-text-label);
+    }
+    body.dark .notification-settings input[type="number"] {
+        background-color: var(--container-bg);
+        border-color: var(--input-border);
+        color: var(--secondary-text);
+    }
+
+
+    /* === Consolidated and Fixed Ad Placeholder Styles === */
+    /* Remove all previous .ad-content-placeholder blocks and replace with this */
+
+    .ad-content-placeholder {
+        margin: 20px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        text-align: center;
+        font-family: sans-serif; /* Consistent font */
+        line-height: 1.6;
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        background-color: var(--ad-placeholder-bg); /* Use variable */
+        border: 1px solid var(--ad-placeholder-border); /* Use variable */
+        color: var(--secondary-text); /* Use variable for general text */
+    }
+
+    .ad-content-placeholder:hover {
+        transform: translateY(-5px);
+    }
+
+    .ad-content-placeholder h3 {
+        font-size: 1.5em;
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--primary-accent); /* Use variable */
+        transition: color 0.3s ease;
+    }
+
+    .ad-content-placeholder p {
+        font-size: 1em;
+        color: var(--secondary-text); /* Use variable */
+        margin-bottom: 15px;
+        transition: color 0.3s ease;
+    }
+
+    .ad-content-placeholder ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .ad-content-placeholder ul li {
+        font-size: 0.95em;
+        color: var(--secondary-text); /* Use variable */
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 25px;
+        transition: color 0.3s ease;
+    }
+
+    .ad-content-placeholder ul li:before {
+        content: '✅';
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .placeholder-link {
+        display: inline-block;
+        background-color: var(--primary-accent); /* Use variable */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .placeholder-link:hover {
+        background-color: #303f9f; /* Darker version of primary accent in light mode */
+    }
+
+    /* Specific placeholder backgrounds/colors */
+    .productivity-tips {
+        /* No unique background/border here, let --ad-placeholder-bg define */
+    }
+    .user-testimonials {
+        /* No unique background/border here, let --ad-placeholder-bg define */
+    }
+    .pwa-features {
+        /* No unique background/border here, let --ad-placeholder-bg define */
+    }
+
+    .user-testimonials .testimonial-item {
+        background-color: var(--container-bg); /* Use container bg for nested items */
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        border: 1px solid var(--input-border); /* Use input border */
+        text-align: left;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .user-testimonials .testimonial-item p {
+        margin-bottom: 5px;
+    }
+    .user-testimonials .testimonial-item .author {
+        font-style: italic;
+        font-size: 0.9em;
+        text-align: right;
+        color: var(--secondary-text-label); /* Use variable */
+    }
+
+    /* --- Dark Mode Overrides for Ad Placeholders (All now use body.dark) --- */
+    /* These use body.dark which is controlled by script.js */
+
+    body.dark .ad-content-placeholder {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark .placeholder-link:hover {
+        background-color: #42a5f5; /* Darker version of dark mode primary accent */
+    }
+
+    body.dark .user-testimonials .testimonial-item {
+        background-color: var(--body-bg); /* Use body-bg for nested items in dark mode for contrast */
+    }
+
+    /* Filter and Sort controls styling */
+    .filter-sort-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        background-color: var(--input-bg);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        /* Add transition for smooth theme change */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .filter-sort-controls label {
+        font-weight: normal;
+        color: var(--secondary-text-label);
+        margin-bottom: 0;
+        text-align: center;
+        /* Add transition for smooth theme change */
+        transition: color 0.3s ease;
+    }
+
+    .filter-sort-controls select,
+    .filter-sort-controls input[type="date"] {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.5rem;
+        border: 1px solid var(--input-border);
+        border-radius: 0.5rem;
+        background-color: var(--container-bg);
+        color: var(--secondary-text);
+        /* Add transition for smooth theme change */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .filter-sort-controls select:focus,
+    .filter-sort-controls input[type="date"]:focus {
+        outline: none;
+        border-color: var(--primary-accent);
+        box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+    }
+
+    .filter-sort-controls button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+        font-weight: bold;
+        border-radius: 0.5rem;
+        border: none;
+        color: white;
+        background-color: #3f51b5;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .filter-sort-controls button:hover {
+        background-color: #303f9f;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 5px rgba(0,0,0,0.15);
+    }
+
+    /* --- Mobile-specific adjustments for filter-sort-controls --- */
+    @media (max-width: 600px) { /* 600px breakpoint ko aap apni zaroorat ke hisaab se adjust kar sakte hain */
+        .filter-sort-controls {
+            flex-direction: column; /* Elements ko vertically stack karein */
+            align-items: stretch; /* Elements ko puri available width lene de */
+            padding: 1.5rem; /* Mobile par thoda zyada padding */
+            gap: 15px; /* Stacked elements ke beech thoda zyada space */
+        }
+
+        .filter-sort-controls label {
+            text-align: left; /* Labels ko left align karein */
+            width: 100%; /* Labels puri width lein */
+            margin-bottom: 5px; /* Label aur input ke beech thodi space */
+        }
+
+        .filter-sort-controls select,
+        .filter-sort-controls input[type="date"],
+        .filter-sort-controls button {
+            width: 100%; /* Inputs, select, aur button puri width lein */
+            margin-bottom: 0; /* Already included in gap, but ensuring no extra margin */
+        }
+    }
+
+    /* --- Dark Mode Overrides for filter-sort-controls --- */
+    body.dark .filter-sort-controls {
+        background-color: var(--input-bg);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    body.dark .filter-sort-controls label {
+        color: var(--secondary-text-label);
+    }
+
+    body.dark .filter-sort-controls select,
+    body.dark .filter-sort-controls input[type="date"] {
+        background-color: var(--container-bg);
+        color: var(--secondary-text);
+        border-color: var(--input-border);
+    }
+
+    body.dark .filter-sort-controls select:focus,
+    body.dark .filter-sort-controls input[type="date"]:focus {
+        border-color: var(--primary-accent);
+        box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.3); /* Dark mode shadow */
+    }
+
+    body.dark .filter-sort-controls button {
+        background-color: var(--primary-accent);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    body.dark .filter-sort-controls button:hover {
+        background-color: #42a5f5; /* Darker primary accent on hover */
+        box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    }
+
+    #todaySummary {
+        display: none;
+        margin-bottom: 2rem;            /* More space below to avoid overlap */
+        padding: 1rem;
+        background-color: #e0f7fa;
+        border-radius: 8px;
+        text-align: center;             /* Center text */
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);  /* Optional: soft shadow */
+    }
+
+    /* Today Summary Styling in Dark Mode */
+    body.dark #todaySummary {
+        background-color: #2e3b4e;
+        color: #ffffff;
+        border: 1px solid #4c5a6b;
+        border-radius: 12px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        padding: 15px;
+    }
+
+
+
+    /* Today Summary Styling in Light Mode (optional for consistency) */
+    body:not(.dark) #todaySummary {
+        border-radius: 12px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+    }
+
+    .whatsapp-share {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    margin-bottom: 2rem;            /* More space below to avoid overlap */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
     font-weight: bold;
-    margin-bottom: 1.5rem;
-    color: var(--primary-accent); /* Use variable */
-    transition: color 0.3s ease;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: var(--secondary-text-label); /* Use variable */
-    text-align: left;
-    transition: color 0.3s ease;
-}
-
-input[type="number"],
-input[type="time"] {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--input-border); /* Use variable */
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    color: var(--secondary-text); /* Input text color from palette */
-    background-color: var(--input-bg); /* Use variable */
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-#shiftDuration { /* Specific style for shift duration input - now full width */
-    width: 100%;
-    text-align: left;
     font-size: 1rem;
-    font-weight: normal;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-input[type="number"]:focus,
-input[type="time"]:focus {
-    outline: none;
-    border-color: var(--primary-accent); /* Use variable */
-    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
-}
-
-.input-flex-wrapper {
-    display: flex;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
     gap: 0.5rem;
-    align-items: center;
-}
+    }
 
-.input-flex-wrapper input {
-    flex: 1;
-    margin-bottom: 0;
-}
+    //deepseek changes
+    /* ===== ENHANCED BUTTON FEEDBACK ===== */
+    /* Add these styles to your existing maincss.css file */
 
-.button-group {
+    /* Improved button feedback with ripple effect */
+    .main-button, .btn-reset, .btn-toggle {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .main-button:after, .btn-reset:after, .btn-toggle:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    }
+
+    .main-button:focus:not(:active)::after, 
+    .btn-reset:focus:not(:active)::after,
+    .btn-toggle:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(200, 200);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(300, 300);
+        opacity: 0;
+    }
+    }
+
+    /* Status indicators for better visual feedback */
+    /* ===== ENHANCED BUTTON FEEDBACK ===== */
+    /* Add these styles to your existing maincss.css file */
+
+    /* Improved button feedback with ripple effect */
+    .main-button, .btn-reset, .btn-toggle {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .main-button:after, .btn-reset:after, .btn-toggle:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    }
+
+    .main-button:focus:not(:active)::after, 
+    .btn-reset:focus:not(:active)::after,
+    .btn-toggle:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(200, 200);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(300, 300);
+        opacity: 0;
+    }
+    }
+
+    /* Status indicators for better visual feedback */
+    /* ===== ENHANCED BUTTON FEEDBACK ===== */
+    /* Add these styles to your existing maincss.css file */
+
+    /* Improved button feedback with ripple effect */
+    .main-button, .btn-reset, .btn-toggle {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .main-button:after, .btn-reset:after, .btn-toggle:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    }
+
+    .main-button:focus:not(:active)::after, 
+    .btn-reset:focus:not(:active)::after,
+    .btn-toggle:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(200, 200);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(300, 300);
+        opacity: 0;
+    }
+    }
+
+    /* Status indicators for better visual feedback */
+    /* ===== ENHANCED BUTTON FEEDBACK ===== */
+    /* Add these styles to your existing maincss.css file */
+
+    /* Improved button feedback with ripple effect */
+    .main-button, .btn-reset, .btn-toggle {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .main-button:after, .btn-reset:after, .btn-toggle:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    }
+
+    .main-button:focus:not(:active)::after, 
+    .btn-reset:focus:not(:active)::after,
+    .btn-toggle:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(200, 200);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(300, 300);
+        opacity: 0;
+    }
+    }
+
+    /* Status indicators for better visual feedback */
+    /* ===== ENHANCED BUTTON FEEDBACK ===== */
+    /* Add these styles to your existing maincss.css file */
+
+    /* Improved button feedback with ripple effect */
+    .main-button, .btn-reset, .btn-toggle {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .main-button:after, .btn-reset:after, .btn-toggle:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    }
+
+    .main-button:focus:not(:active)::after, 
+    .btn-reset:focus:not(:active)::after,
+    .btn-toggle:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(200, 200);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(300, 300);
+        opacity: 0;
+    }
+    }
+
+    /* Status indicators for better visual feedback */
+    .main-button, .btn-reset, .btn-toggle {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .main-button:after, .btn-reset:after, .btn-toggle:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    }
+
+    .main-button:focus:not(:active)::after, 
+    .btn-reset:focus:not(:active)::after,
+    .btn-toggle:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(200, 200);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(300, 300);
+        opacity: 0;
+    }
+    }
+
+    /* Status indicators for better visual feedback */
+    .status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    }
+
+    .status-indicator.active {
+    background-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    }
+
+    .status-indicator.inactive {
+    background-color: #ccc;
+    }
+
+    .status-indicator.break {
+    background-color: #FF9800;
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+    animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+    }
+
+    /* Break Toggle Switch Styling */
+.toggle-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
 }
 
-.main-button {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 0.75rem;
-    border: none;
-    color: white;
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    background-color: var(--input-border);
+    border-radius: 34px;
+    transition: background-color 0.4s;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    flex: 1;
 }
 
-.main-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+.switch.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
-/* Professional Colors for IN/OUT Buttons */
-.btn-in {
-    background-color: var(--primary-accent); /* Use variable */
+.switch .slider {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--container-bg);
+    border-radius: 50%;
+    transition: transform 0.4s;
 }
 
-.btn-in:hover {
-    background-color: #303f9f; /* Darker Indigo */
+.switch.on {
+    background-color: #4CAF50;
 }
 
-.btn-out {
-    background-color: var(--secondary-text-label); /* Use variable (Blue Grey) */
+.switch.on .slider {
+    transform: translateX(26px);
 }
 
-.btn-out:hover {
-    background-color: #37474f; /* Darker Blue Grey */
+body.dark .switch {
+    background-color: var(--input-border);
 }
 
-.btn-reset {
-    background-color: #90a4ae; /* Blue Grey */
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+body.dark .switch.on {
+    background-color: #66bb6a;
 }
 
-.btn-reset:hover {
-    background-color: #78909c; /* Darker Blue Grey */
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(0,0,0,0.15);
-}
 
-/* Professional Colors for Break Toggle Button */
-.btn-toggle {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 0.75rem;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.btn-toggle.on {
-    background-color: #4CAF50; /* Green for ON */
-}
-
-.btn-toggle.on:hover {
-    background-color: #388E3C; /* Darker Green */
-}
-
-.btn-toggle.off {
-    background-color: #f44336; /* Red for OFF */
-}
-
-.btn-toggle.off:hover {
-    background-color: #d32f2f; /* Darker Red */
-}
-
-.status-box {
-    background-color: var(--status-box-bg); /* Use variable */
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-top: 2rem;
-    color: var(--status-text-color); /* Use variable */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.status-box p {
-    margin-bottom: 0.5rem;
-    color: var(--status-text-color); /* Use variable */
-    transition: color 0.3s ease;
-}
-
-/* Increased font size for status and leaving time */
-.status-box .display-text {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--status-display-text-color); /* Use variable */
-    transition: color 0.3s ease;
-}
-
-.status-box .large-text {
-    font-size: 3rem;
-    font-weight: bolder;
-    color: var(--status-display-text-color); /* Use variable */
-    transition: color 0.3s ease;
-}
-
-.ad-placeholder {
-    background-color: var(--ad-placeholder-bg); /* Use variable */
-    border: 1px dashed var(--ad-placeholder-border); /* Use variable */
-    border-radius: 0.5rem;
-    padding: 1rem;
-    text-align: center;
-    color: var(--secondary-text-label); /* Use variable */
-    font-size: 0.9rem;
-    margin-top: 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.hidden {
+/* Tutorial Overlay Styling */
+.tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    pointer-events: none; /* Allows clicks to pass through to highlighted elements */
     display: none;
 }
 
-/* Reports Section specific styles */
-#reportsSection {
-    background-color: var(--container-bg);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    //width: 100%;
-    //max-width: 400px;
-    text-align: center;
-    margin-top: 2rem;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    color: var(--secondary-text);
+/* Add a new class that we will apply to the message box and buttons to make them clickable */
+.tutorial-interactive {
+    pointer-events: auto; /* Re-enables pointer events for this element and its children */
 }
 
-#reportsSection h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-accent);
-}
 
-#reportsList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid var(--input-border);
-    border-radius: 0.5rem;
-    background-color: var(--input-bg);
-    padding: 0.5rem;
-}
 
-#reportsList li {
-    background-color: var(--body-bg);
-    margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    text-align: left;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    font-size: 0.9rem;
-    color: var(--secondary-text-label);
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
 
-#reportsList li strong {
-    color: var(--primary-accent);
-}
-
-#reportsList li span {
-    font-size: 0.85rem;
-    color: var(--secondary-text-label);
-}
-
-#reportsList li:last-child {
-    margin-bottom: 0;
-}
-
-#noReportsMessage {
-    color: var(--secondary-text-label);
-    font-style: italic;
-    margin-top: 1rem;
-}
-
-#clearAllReportsBtn {
-    background-color: #f44336;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    margin-top: 1.5rem;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#clearAllReportsBtn:hover {
-    background-color: #d32f2f;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(0,0,0,0.15);
-}
-
-/* View Reports button styling */
-#viewReportsBtn {
-    background-color: var(--primary-accent);
-    color: white;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#viewReportsBtn:hover {
-    background-color: #303f9f;
-}
-
-/* Small date text styling */
-.small-date-text {
-    font-size: 0.75rem;
-    color: var(--secondary-text-label);
-    transition: color 0.3s ease;
-}
-
-/* Scroll message styling */
-#scrollMessage {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    font-size: 0.9rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-}
-
-#scrollMessage.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Message box styling (for showMessage and showConfirmation) */
-.custom-message-box {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.tutorial-message-box {
+ position: absolute; /* Changed from fixed to absolute */
     background-color: var(--container-bg);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 103;
     text-align: center;
     color: var(--secondary-text);
     font-weight: bold;
     max-width: 80%;
-}
-
-.custom-message-box button {
-    margin-top: 15px;
-    padding: 8px 15px;
-    background-color: var(--primary-accent);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.custom-message-box #confirmYes {
-    background-color: #4CAF50;
-    margin-right: 10px;
-}
-
-.custom-message-box #confirmNo {
-    background-color: #f44336;
-}
-
-/* Filter and Sort controls styling */
-.filter-sort-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    background-color: var(--input-bg);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.filter-sort-controls label {
-    font-weight: normal;
-    color: var(--secondary-text-label);
-    margin-bottom: 0;
-    text-align: center;
-}
-
-.filter-sort-controls select,
-.filter-sort-controls input[type="date"] {
-    flex: 1;
-    min-width: 120px;
-    padding: 0.5rem;
-    border: 1px solid var(--input-border);
-    border-radius: 0.5rem;
-    background-color: var(--container-bg);
-    color: var(--secondary-text);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.filter-sort-controls select:focus,
-.filter-sort-controls input[type="date"]:focus {
-    outline: none;
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
-}
-
-.filter-sort-controls button {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    border: none;
-    color: white;
-    background-color: #3f51b5;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.filter-sort-controls button:hover {
-    background-color: #303f9f;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(0,0,0,0.15);
-}
-
-/* Notification settings styling */
-.notification-settings {
-    background-color: var(--input-bg);
-    padding: 1rem;
-    border-radius: 0.75rem;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    margin-top: 1.5rem;
-    text-align: left;
-    color: var(--secondary-text-label);
-}
-
-.notification-settings div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.notification-settings label {
-    margin-bottom: 0;
-    margin-right: 10px;
-    font-weight: normal;
-}
-
-.notification-settings input[type="checkbox"] {
-    margin-right: 5px;
-    width: auto;
-    margin-bottom: 0;
-}
-
-.notification-settings input[type="number"] {
-    width: 80px;
-    margin-bottom: 0;
-    text-align: center;
-}
-
-/* General styling for the notification-settings container (REDUNDANT) */
-/* This block duplicates the .notification-settings and h3 rules above. */
-/* Keeping it here for now as per your provided file, but it should be merged. */
-.notification-settings {
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #ffffff; /* This specific color will override var(--input-bg) in light mode */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.notification-settings h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-/* End of REDUNDANT block */
-
-
-/* Styles for individual setting rows within notification-settings (REDUNDANT) */
-/* This block also duplicates styles from above. */
-.notification-settings > div {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-#enableNotificationsCheckbox {
-    margin-right: 8px;
-    transform: scale(1.2);
-}
-
-.notification-settings label {
-    font-size: 1em;
-    color: #555; /* This specific color will override var(--secondary-text-label) in light mode */
-    flex-shrink: 0;
-}
-
-#reminderMinutesInput {
-    width: 60px;
-    padding: 8px;
-    border: 1px solid #ccc; /* This specific color will override var(--input-border) in light mode */
-    border-radius: 4px;
-    text-align: center;
-    font-size: 1em;
-    -moz-appearance: textfield;
-}
-
-#reminderMinutesInput::-webkit-outer-spin-button,
-#reminderMinutesInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-/* End of REDUNDANT block */
-
-
-/* Media Query for very small screens */
-@media (max-width: 400px) {
-    .notification-settings > div {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-/* Base styles for all content placeholders */
-.ad-content-placeholder {
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    transition: transform 0.3s ease-in-out;
-}
-
-.ad-content-placeholder:hover {
-    transform: translateY(-5px);
-}
-
-.ad-content-placeholder h3 {
-    font-size: 1.5em;
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #4a4a8a; /* Blue/purple for headings (needs to be var) */
-}
-
-.ad-content-placeholder p {
-    font-size: 1em;
-    color: #555; /* Standard text color (needs to be var) */
-    margin-bottom: 15px;
-}
-
-.ad-content-placeholder ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.ad-content-placeholder ul li {
-    font-size: 0.95em;
-    color: #666; /* List item text color (needs to be var) */
-    margin-bottom: 8px;
-    position: relative;
-    padding-left: 25px;
-}
-
-.ad-content-placeholder ul li:before {
-    content: '✅';
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.placeholder-link {
-    display: inline-block;
-    background-color: #6a6ad0; /* Button-like link (needs to be var) */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.placeholder-link:hover {
-    background-color: #5a5ab0; /* Darker hover effect (needs to be var) */
-}
-
-/* Specific styles for each placeholder type */
-
-.productivity-tips {
-    background-color: #e6f7ff; /* Light blue (needs to be var) */
-    border: 1px solid #b3e0ff; /* (needs to be var) */
-}
-.productivity-tips h3 {
-    color: #007bff; /* (needs to be var) */
-}
-
-.user-testimonials {
-    background-color: #f0f8ff; /* (needs to be var) */
-    border: 1px solid #cceeff; /* (needs to be var) */
-}
-.user-testimonials h3 {
-    color: #ff9800; /* (needs to be var) */
-}
-.user-testimonials .testimonial-item {
-    background-color: #ffffff; /* (needs to be var) */
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #eee; /* (needs to be var) */
-    text-align: left;
-}
-.user-testimonials .testimonial-item p {
-    margin-bottom: 5px;
-}
-.user-testimonials .testimonial-item .author {
-    font-style: italic;
-    font-size: 0.9em;
-    text-align: right;
-    color: #777; /* (needs to be var) */
-}
-
-.pwa-features {
-    background-color: #eaffe6; /* (needs to be var) */
-    border: 1px solid #c6f6c6; /* (needs to be var) */
-}
-.pwa-features h3 {
-    color: #28a745; /* (needs to be var) */
-}
-
-
-/* --- Dark Mode Adjustments for generic classes --- */
-/* Your current setup uses body.dark for main app and body.dark-mode for ad-placeholders.
-   We need to standardize this to body.dark */
-
-body.dark .ad-content-placeholder { /* Changed from body.dark-mode */
-    background-color: var(--ad-placeholder-bg); /* Use variable */
-    border: 1px solid var(--ad-placeholder-border); /* Use variable */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-body.dark .ad-content-placeholder h3 { /* Changed from body.dark-mode */
-    color: var(--primary-accent); /* Use variable */
-}
-
-body.dark .ad-content-placeholder p,
-body.dark .ad-content-placeholder ul li { /* Changed from body.dark-mode */
-    color: var(--secondary-text); /* Use variable */
-}
-
-body.dark .placeholder-link { /* Changed from body.dark-mode */
-    background-color: var(--primary-accent); /* Use variable */
-}
-
-body.dark .placeholder-link:hover { /* Changed from body.dark-mode */
-    background-color: #42a5f5; /* Darker primary accent on hover (dark mode) */
-}
-
-/* Dark mode specific for testimonial items */
-body.dark .user-testimonials .testimonial-item { /* Changed from body.dark-mode */
-    background-color: var(--body-bg); /* Use variable */
-    border: 1px solid var(--input-border); /* Use variable */
-}
-
-body.dark .user-testimonials .testimonial-item .author { /* Changed from body.dark-mode */
-    color: var(--secondary-text-label); /* Use variable */
-}
-
-/* Adjust specific placeholder backgrounds for dark mode */
-body.dark .productivity-tips { /* Changed from body.dark-mode */
-    background-color: var(--ad-placeholder-bg); /* Use variable */
-    border: 1px solid var(--ad-placeholder-border); /* Use variable */
-}
-body.dark .productivity-tips h3 { /* Changed from body.dark-mode */
-    color: var(--primary-accent); /* Use variable */
-}
-
-body.dark .user-testimonials { /* Changed from body.dark-mode */
-    background-color: var(--ad-placeholder-bg); /* Use variable */
-    border: 1px solid var(--ad-placeholder-border); /* Use variable */
-}
-body.dark .user-testimonials h3 { /* Changed from body.dark-mode */
-    color: var(--primary-accent); /* Use variable */
-}
-
-body.dark .pwa-features { /* Changed from body.dark-mode */
-    background-color: var(--ad-placeholder-bg); /* Use variable */
-    border: 1px solid var(--ad-placeholder-border); /* Use variable */
-}
-body.dark .pwa-features h3 { /* Changed from body.dark-mode */
-    color: var(--primary-accent); /* Use variable */
-}
-
-
-/* --- Additional Styles for tips.html (Matching existing UI) --- */
-
-/* General page section styling (for content-wrapper) */
-.content-wrapper {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--container-bg);
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    color: var(--secondary-text);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-}
-
-/* Page heading for tips.html */
-.page-section h1 {
-    text-align: center;
-    color: var(--primary-accent);
-    margin-bottom: 30px;
-    font-size: 2rem;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-/* Paragraphs within the tips page */
-.page-section p {
-    margin-bottom: 15px;
-    line-height: 1.7;
-    color: var(--secondary-text);
-    transition: color 0.3s ease;
-}
-
-/* Styling for individual Tip Cards */
-.tip-card {
-    background-color: var(--body-bg); /* Using body background for cards within content-wrapper */
-    border: 1px solid var(--input-border);
-    border-radius: 0.75rem;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    color: var(--secondary-text);
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-.tip-card h2 {
-    color: var(--primary-accent);
-    font-size: 1.4em;
-    margin-top: 0;
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
-}
-
-.tip-card ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-.tip-card ul li {
-    margin-bottom: 8px;
-    color: var(--secondary-text);
-    position: relative;
-    padding-left: 25px;
-    transition: color 0.3s ease;
-}
-
-.tip-card ul li:before {
-    content: '✅';
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1.1em;
-    line-height: 1.5;
-}
-
-/* Styling for the "Back to App" button on tips.html */
-.back-to-app-link {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.back-to-app-link .button {
-    background-color: var(--primary-accent);
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 0.75rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.back-to-app-link .button:hover {
-    background-color: #303f9f;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0,0,0,0.2);
-}
-
-/* Navigation bar styling (for header in all pages) */
-header {
-    max-width: 900px;
-    /* max-width: 400px; /* Removed max-width from header for full width design */
-    margin: 0 auto 1.5rem auto; /* Top/Bottom margin, auto left/right for centering */
-    padding: 0.75rem 1rem;
-    background-color: var(--container-bg);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Matched main button shadow */
-    border-radius: 1rem; /* Matched container border-radius */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-}
-
-.main-nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    font-weight: bold;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: var(--primary-accent);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    white-space: nowrap;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    background-color: var(--primary-accent);
-    color: white;
-}
-
-/* Footer styling */
-footer {
-    width: 100%;
-    padding: 1rem;
-    margin-top: 20px;
-    background-color: var(--container-bg);
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
-    text-align: center;
-    color: var(--secondary-text-label);
-    font-size: 0.9em;
-    border-radius: 1rem 1rem 0 0;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-}
-
-.footer-nav {
-    margin-top: 10px;
-}
-
-.footer-nav a {
-    color: var(--secondary-text-label);
-    text-decoration: none;
-    margin: 0 8px;
-    transition: color 0.3s ease;
-}
-
-.footer-nav a:hover {
-    color: var(--primary-accent);
-}
-
-/* --- Dark Mode Overrides for all elements that use variables --- */
-/* These use body.dark which is controlled by script.js */
-
-body.dark .main-button {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-body.dark .main-button:hover {
-    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
-}
-body.dark .btn-in {
-    background-color: var(--primary-accent);
-}
-body.dark .btn-in:hover {
-    background-color: #42a5f5; /* Darker version of dark mode primary accent */
-}
-body.dark .btn-out {
-    background-color: var(--secondary-text-label);
-}
-body.dark .btn-out:hover {
-    background-color: #78909c;
-}
-body.dark .btn-reset {
-    background-color: #90a4ae;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-body.dark .btn-reset:hover {
-    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-}
-body.dark .btn-toggle {
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-body.dark .btn-toggle.on {
-    background-color: #66bb6a;
-}
-body.dark .btn-toggle.on:hover {
-    background-color: #43a047;
-}
-body.dark .btn-toggle.off {
-    background-color: #ef5350;
-}
-body.dark .btn-toggle.off:hover {
-    background-color: #e53935;
-}
-body.dark #darkModeToggle {
-    background-color: var(--input-border); /* Use input border for toggle */
-    color: var(--secondary-text); /* Use secondary text for icon */
-}
-
-body.dark #viewReportsBtn {
-    background-color: var(--primary-accent);
-}
-body.dark #viewReportsBtn:hover {
-    background-color: #42a5f5;
-}
-body.dark #clearAllReportsBtn {
-    background-color: #ef5350;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-body.dark #clearAllReportsBtn:hover {
-    background-color: #e53935;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-}
-
-body.dark .filter-sort-controls select,
-body.dark .filter-sort-controls input[type="date"] {
-    background-color: var(--container-bg);
-    color: var(--secondary-text);
-    border-color: var(--input-border);
-}
-
-body.dark .filter-sort-controls button {
-    background-color: var(--primary-accent);
-}
-
-body.dark .filter-sort-controls button:hover {
-    background-color: #42a5f5;
-}
-/* IMPORTANT: The body.dark .notification-settings and ad-content-placeholder rules below
-   need to be simplified and ensure they are picking up colors from variables correctly.
-   Also, the redundant notification-settings blocks are problematic. */
-
-/* === Consolidated and Fixed Notification Settings Styles === */
-/* Remove all previous .notification-settings blocks and replace with this */
-
-.notification-settings {
-    background-color: var(--input-bg); /* Use variable */
-    padding: 1rem; /* Adjust as needed */
-    border-radius: 0.75rem; /* Consistent border-radius */
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    margin-top: 1.5rem;
-    text-align: left;
-    color: var(--secondary-text-label); /* Use variable */
-    margin-bottom: 20px; /* Added margin for separation */
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.notification-settings h3 {
-    font-weight: bold;
-    margin-bottom: 1rem; /* Adjusted margin */
-    color: var(--primary-accent); /* Use variable */
-    transition: color 0.3s ease;
-}
-
-.notification-settings div { /* For individual setting rows */
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap; /* Ensure responsiveness */
-    gap: 10px; /* Space between elements in a row */
-}
-
-.notification-settings label {
-    margin-bottom: 0;
-    margin-right: 10px;
-    font-weight: normal;
-    color: var(--secondary-text-label); /* Use variable */
-}
-
-.notification-settings input[type="checkbox"] {
-    margin-right: 5px;
-    width: auto;
-    margin-bottom: 0;
-    transform: scale(1.2); /* Make checkbox slightly larger for touch */
-}
-
-.notification-settings input[type="number"] {
-    width: 80px; /* Smaller width for minutes input */
-    padding: 8px; /* Consistent padding */
-    border: 1px solid var(--input-border); /* Use variable */
-    border-radius: 4px;
-    text-align: center;
-    font-size: 1em;
-    -moz-appearance: textfield;
-    margin-bottom: 0;
-    background-color: var(--container-bg); /* Input background from container-bg */
-    color: var(--secondary-text); /* Input text color */
-}
-
-/* Hide default number input arrows in WebKit browsers */
-.notification-settings input[type="number"]::-webkit-outer-spin-button,
-.notification-settings input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Dark mode for notification settings */
-body.dark .notification-settings {
-    background-color: var(--input-bg); /* Dark mode input background */
-    color: var(--secondary-text-label);
-}
-body.dark .notification-settings h3 {
-    color: var(--primary-accent);
-}
-body.dark .notification-settings label {
-    color: var(--secondary-text-label);
-}
-body.dark .notification-settings input[type="number"] {
-    background-color: var(--container-bg);
-    border-color: var(--input-border);
-    color: var(--secondary-text);
-}
-
-
-/* === Consolidated and Fixed Ad Placeholder Styles === */
-/* Remove all previous .ad-content-placeholder blocks and replace with this */
-
-.ad-content-placeholder {
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    text-align: center;
-    font-family: sans-serif; /* Consistent font */
-    line-height: 1.6;
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    background-color: var(--ad-placeholder-bg); /* Use variable */
-    border: 1px solid var(--ad-placeholder-border); /* Use variable */
-    color: var(--secondary-text); /* Use variable for general text */
-}
-
-.ad-content-placeholder:hover {
-    transform: translateY(-5px);
-}
-
-.ad-content-placeholder h3 {
-    font-size: 1.5em;
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: var(--primary-accent); /* Use variable */
-    transition: color 0.3s ease;
-}
-
-.ad-content-placeholder p {
-    font-size: 1em;
-    color: var(--secondary-text); /* Use variable */
-    margin-bottom: 15px;
-    transition: color 0.3s ease;
-}
-
-.ad-content-placeholder ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.ad-content-placeholder ul li {
-    font-size: 0.95em;
-    color: var(--secondary-text); /* Use variable */
-    margin-bottom: 8px;
-    position: relative;
-    padding-left: 25px;
-    transition: color 0.3s ease;
-}
-
-.ad-content-placeholder ul li:before {
-    content: '✅';
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.placeholder-link {
-    display: inline-block;
-    background-color: var(--primary-accent); /* Use variable */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.placeholder-link:hover {
-    background-color: #303f9f; /* Darker version of primary accent in light mode */
-}
-
-/* Specific placeholder backgrounds/colors */
-.productivity-tips {
-    /* No unique background/border here, let --ad-placeholder-bg define */
-}
-.user-testimonials {
-    /* No unique background/border here, let --ad-placeholder-bg define */
-}
-.pwa-features {
-    /* No unique background/border here, let --ad-placeholder-bg define */
-}
-
-.user-testimonials .testimonial-item {
-    background-color: var(--container-bg); /* Use container bg for nested items */
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    border: 1px solid var(--input-border); /* Use input border */
-    text-align: left;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.user-testimonials .testimonial-item p {
-    margin-bottom: 5px;
-}
-.user-testimonials .testimonial-item .author {
-    font-style: italic;
-    font-size: 0.9em;
-    text-align: right;
-    color: var(--secondary-text-label); /* Use variable */
-}
-
-/* --- Dark Mode Overrides for Ad Placeholders (All now use body.dark) --- */
-/* These use body.dark which is controlled by script.js */
-
-body.dark .ad-content-placeholder {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-body.dark .placeholder-link:hover {
-    background-color: #42a5f5; /* Darker version of dark mode primary accent */
-}
-
-body.dark .user-testimonials .testimonial-item {
-    background-color: var(--body-bg); /* Use body-bg for nested items in dark mode for contrast */
-}
-
-/* Filter and Sort controls styling */
-.filter-sort-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    background-color: var(--input-bg);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    /* Add transition for smooth theme change */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.filter-sort-controls label {
-    font-weight: normal;
-    color: var(--secondary-text-label);
-    margin-bottom: 0;
-    text-align: center;
-    /* Add transition for smooth theme change */
-    transition: color 0.3s ease;
-}
-
-.filter-sort-controls select,
-.filter-sort-controls input[type="date"] {
-    flex: 1;
-    min-width: 120px;
-    padding: 0.5rem;
-    border: 1px solid var(--input-border);
-    border-radius: 0.5rem;
-    background-color: var(--container-bg);
-    color: var(--secondary-text);
-    /* Add transition for smooth theme change */
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.filter-sort-controls select:focus,
-.filter-sort-controls input[type="date"]:focus {
-    outline: none;
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
-}
-
-.filter-sort-controls button {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    border: none;
-    color: white;
-    background-color: #3f51b5;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.filter-sort-controls button:hover {
-    background-color: #303f9f;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(0,0,0,0.15);
-}
-
-/* --- Mobile-specific adjustments for filter-sort-controls --- */
-@media (max-width: 600px) { /* 600px breakpoint ko aap apni zaroorat ke hisaab se adjust kar sakte hain */
-    .filter-sort-controls {
-        flex-direction: column; /* Elements ko vertically stack karein */
-        align-items: stretch; /* Elements ko puri available width lene de */
-        padding: 1.5rem; /* Mobile par thoda zyada padding */
-        gap: 15px; /* Stacked elements ke beech thoda zyada space */
-    }
-
-    .filter-sort-controls label {
-        text-align: left; /* Labels ko left align karein */
-        width: 100%; /* Labels puri width lein */
-        margin-bottom: 5px; /* Label aur input ke beech thodi space */
-    }
-
-    .filter-sort-controls select,
-    .filter-sort-controls input[type="date"],
-    .filter-sort-controls button {
-        width: 100%; /* Inputs, select, aur button puri width lein */
-        margin-bottom: 0; /* Already included in gap, but ensuring no extra margin */
-    }
-}
-
-/* --- Dark Mode Overrides for filter-sort-controls --- */
-body.dark .filter-sort-controls {
-    background-color: var(--input-bg);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-}
-
-body.dark .filter-sort-controls label {
-    color: var(--secondary-text-label);
-}
-
-body.dark .filter-sort-controls select,
-body.dark .filter-sort-controls input[type="date"] {
-    background-color: var(--container-bg);
-    color: var(--secondary-text);
-    border-color: var(--input-border);
-}
-
-body.dark .filter-sort-controls select:focus,
-body.dark .filter-sort-controls input[type="date"]:focus {
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.3); /* Dark mode shadow */
-}
-
-body.dark .filter-sort-controls button {
-    background-color: var(--primary-accent);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-body.dark .filter-sort-controls button:hover {
-    background-color: #42a5f5; /* Darker primary accent on hover */
-    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-}
-
-#todaySummary {
+    min-width: 300px;
     display: none;
-    margin-bottom: 2rem;            /* More space below to avoid overlap */
-    padding: 1rem;
-    background-color: #e0f7fa;
-    border-radius: 8px;
-    text-align: center;             /* Center text */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);  /* Optional: soft shadow */
+    /* Important: Reset the transform and positioning properties that were for fixed positioning */
+    top: auto;
+    left: auto;
+    transform: none;
 }
 
-/* Today Summary Styling in Dark Mode */
-body.dark #todaySummary {
-    background-color: #2e3b4e;
-    color: #ffffff;
-    border: 1px solid #4c5a6b;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-    padding: 15px;
+.tutorial-message-box .button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
 }
 
 
 
-/* Today Summary Styling in Light Mode (optional for consistency) */
-body:not(.dark) #todaySummary {
-    border-radius: 12px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+.tutorial-highlighted {
+     z-index: 102;
+    position: relative;
+    /* Remove the box-shadow property here */
+    border: 2px solid var(--primary-accent);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    pointer-events: auto;
 }
 
-.whatsapp-share {
-  background-color: #25D366;
-  color: white;
-  border: none;
-  margin-bottom: 2rem;            /* More space below to avoid overlap */
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+/* Add a new pseudo-element to create the overlay effect */
+.tutorial-highlighted::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    z-index: -1;
 }
+
+body.dark .tutorial-message-box {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}s
+
 

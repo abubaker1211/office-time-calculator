@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Office Time Calculator</title>
+    <link href="maincss.css" rel="stylesheet"/>
+</head>
+<body class="flex flex-col items-center justify-content-center min-h-screen p-4">
+    <header>
+        <!-- Header will be loaded by common.js -->
+    </header>
+
+    <main class="content-wrapper">
+        <section class="page-section">
+            <h1>Work Reports</h1>
+            
+  <!-- Reports List -->
+            <ul id="reportsList">
+                <li id="noReportsMessage" style="display: none;">No reports yet.</li>
+            </ul>
+    <!-- Action Buttons -->
+            <button id="clearAllReportsBtn">Clear All Reports</button>
+<br>
+            <button id="clearAllReportsBtn" style="background-color: #4CAF50; margin-left: 27px;">Export to CSV</button>
+            <!-- Filter and Sort Controls -->
+<br><br>                
+<div class="filter-sort-controls">
+                <!-- Sort control on a single line -->
+                <div class="filter-row">
+                    <label for="sortReports">Sort by:</label>
+                    <select id="sortReports">
+                        <option value="dateDesc">Date (Newest First)</option>
+                        <option value="dateAsc">Date (Oldest First)</option>
+                        <option value="workDurationDesc">Actual Work (Longest First)</option>
+                        <option value="workDurationAsc">Actual Work (Shortest First)</option>
+                    </select>
+                </div>
+                <!-- Date filters on a single line -->
+                <div class="filter-row">
+                    <label for="filterStartDate">From:</label>
+                    <input id="filterStartDate" type="date"/>
+                    <label for="filterEndDate">To:</label>
+                    <input id="filterEndDate" type="date"/>
+                </div>
+                <button id="applyFilterSortBtn">Apply</button>
+            </div>
+            
+          
+                        <button id="backToAppBtn" class="btn-reset" style="margin-top: 1rem; margin-left: 0.5rem;">Back to App</button>
+
+        
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer will be loaded by common.js -->
+    </footer>
+    
+    <!-- Load your main scripts first -->
+    <script src="common.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Now, run the page-specific script that uses the loaded functions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if reportsList exists and the main functions are available
+            const reportsList = document.getElementById('reportsList');
+            if (reportsList && window.loadReports && window.renderReports) {
+                window.loadReports();
+                window.renderReports();
+
+                // Set up event listeners that call functions from the main script
+                const applyFilterSortBtn = document.getElementById('applyFilterSortBtn');
+                if (applyFilterSortBtn) {
+                    applyFilterSortBtn.addEventListener('click', function() {
+                        window.renderReports();
+                    });
+                }
+                
+                const clearAllReportsBtn = document.getElementById('clearAllReportsBtn');
+                if (clearAllReportsBtn) {
+                    clearAllReportsBtn.addEventListener('click', function() {
+                        window.clearAllReports();
+                    });
+                }
+                
+                const exportReportsBtn = document.getElementById('exportReportsBtn');
+                if (exportReportsBtn) {
+                    exportReportsBtn.addEventListener('click', function() {
+                        window.exportReportsToCSV();
+                    });
+                }
+
+                // Listen for updates from other pages
+                window.addEventListener('reportsUpdated', function() {
+                    window.loadReports();
+                    window.renderReports();
+                });
+
+                const sortReportsSelect = document.getElementById('sortReports');
+                if(sortReportsSelect){
+                    sortReportsSelect.addEventListener('change', function(){
+                        window.renderReports();
+                    });
+                }
+                const filterStartDateInput = document.getElementById('filterStartDate');
+                if(filterStartDateInput){
+                    filterStartDateInput.addEventListener('change', function(){
+                        window.renderReports();
+                    });
+                }
+                 const filterEndDateInput = document.getElementById('filterEndDate');
+                if(filterEndDateInput){
+                    filterEndDateInput.addEventListener('change', function(){
+                        window.renderReports();
+                    });
+                }
+
+            }
+
+            // Always add the "Back to App" button listener
+            document.getElementById('backToAppBtn').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+    
+</body>
+</html>
