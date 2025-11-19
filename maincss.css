@@ -30,6 +30,38 @@
     */
 
     /* CSS Variables for easier theme management */
+
+/* ====== RESPONSIVE SAFEGUARDS (ADD THIS) ====== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* prevent horizontal scroll caused by wide elements */
+}
+
+/* make main app wrapper behave like a mobile app */
+.content-wrapper {
+  width: 100%;
+  max-width: 420px; /* phone-friendly width — we can adjust later */
+  margin: 12px auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* clamp large embedded content */
+img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonial-item, .tip-card {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* allow flex children to wrap instead of forcing overflow */
+.input-flex-wrapper, .button-group {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+
     :root {
         --body-bg: #f5f7fa;
         --container-bg: #ffffff;
@@ -286,8 +318,8 @@
         padding: 2rem;
         border-radius: 1rem;
         box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        //width: 100%;
-        //max-width: 400px;
+        /* width: 100%;
+        max-width: 400px; */
         text-align: center;
         margin-top: 2rem;
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
