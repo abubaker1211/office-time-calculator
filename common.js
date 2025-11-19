@@ -60,3 +60,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+/* Theme shim + binding for existing toggle */
+(function(){
+  const KEY = 'tweakiq_theme';
+  const doc = document.documentElement;
+  const btn = document.getElementById('darkModeToggle');
+  const icon = document.getElementById('theme-icon');
+
+  function apply(theme){
+    if(theme === 'dark'){ doc.setAttribute('data-theme','dark'); }
+    else { doc.removeAttribute('data-theme'); }
+    if(icon) icon.textContent = theme === 'dark' ? '🌙' : '🌞';
+  }
+
+  // init: saved > system
+  try {
+    const saved = localStorage.getItem(KEY);
+    if(saved === 'dark' || saved === 'light') apply(saved);
+    else {
+      const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      apply(prefers ? 'dark' : 'light');
+    }
+  } catch(e){
+    const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    apply(prefers ? 'dark' : 'light');
+  }
+
+  // expose global API
+  window.setTheme = function(t){
+    try { localStorage.setItem(KEY, t); } catch(e){}
+    apply(t);
+  };
+  window.toggleTheme = function(){
+    const isDark = doc.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    try { localStorage.setItem(KEY, next); } catch(e){}
+    apply(next);
+  };
+
+  // bind existing button
+  if(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      window.toggleTheme();
+    });
+  }
+})();
+
