@@ -1970,3 +1970,49 @@ body.dark .tutorial-message-box {
 }
 
 
+/* ===== Fix for custom popup (.custom-message-box) ===== */
+body .custom-message-box,
+.custom-message-box {
+  background: var(--card-bg) !important;       /* solid background using theme */
+  color: var(--primary-text) !important;       /* readable text */
+  border: 1px solid var(--surface-border) !important;
+  box-shadow: var(--shadow-elev) !important;
+  border-radius: 12px !important;
+  padding: 18px !important;
+  width: auto !important;
+  max-width: calc(100% - 48px) !important;
+  opacity: 1 !important;
+  background-image: none !important;           /* remove gradients/transparent bg */
+  z-index: 10000 !important;                    /* ensure above page */
+}
+
+/* Buttons inside that popup */
+.custom-message-box button,
+.custom-message-box .btn,
+.custom-message-box .button {
+  background: var(--primary-accent) !important;
+  color: var(--primary-contrast) !important;
+  border: none !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 12px rgba(2,6,23,0.08) !important;
+  cursor: pointer !important;
+}
+
+/* Small "OK" button centered style if needed */
+.custom-message-box button {
+  display: inline-block !important;
+  margin: 10px auto 0 !important;
+}
+
+/* If the popup creates an overlay, ensure it's dim not white */
+.custom-message-box + .overlay,
+.custom-message-box + .backdrop,
+.overlay, .modal-backdrop {
+  background-color: rgba(2,6,23,0.35) !important;
+}
+
+/* mobile tweak */
+@media (max-width: 420px){
+  .custom-message-box { margin: 12px !important; padding: 14px !important; max-width: calc(100% - 28px) !important; }
+}
