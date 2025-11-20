@@ -166,7 +166,7 @@ function saveState() {
         shiftDurationInput: shiftDurationInput ? parseFloat(shiftDurationInput.value) : 9,
         currentShiftOutTime: currentShiftOutTime ? currentShiftOutTime.toISOString() : null,
         manualInTimeValue: manualInTimeInput ? manualInTimeInput.value : '',
-        isDarkMode: isDarkMode,
+       // isDarkMode: isDarkMode,
         enableNotifications: enableNotifications, // Save notification preference
         reminderMinutesBeforeOut: reminderMinutesInput ? reminderMinutesInput.value : 15, // Save reminder minutes
         notificationSentForCurrentShift: notificationSentForCurrentShift // Save notification sent status
@@ -211,14 +211,24 @@ function loadState() {
                 startBreakTimer();
             }
         }
-        // Load hone par dark mode apply karein
+      
+            // --- THEME SYNC: use common.js theme store as source of truth ---
+    try {
+        const theme = (typeof window.getTheme === 'function') ? window.getTheme() : localStorage.getItem('tweakiq_theme');
+        isDarkMode = (theme === 'dark');
         if (isDarkMode) {
-            body.classList.add('dark');
-            if (darkModeIcon) darkModeIcon.textContent = '☀️'; // Sun icon for dark mode
+            document.body.classList.add('dark');
+            if (darkModeIcon) darkModeIcon.textContent = '☀️';
         } else {
-            body.classList.remove('dark');
-            if (darkModeIcon) darkModeIcon.textContent = '🌙'; // Moon icon for light mode
+            document.body.classList.remove('dark');
+            if (darkModeIcon) darkModeIcon.textContent = '🌙';
         }
+    } catch(e) {
+        // fallback if getTheme isn't present
+    }
+
+        
+
 
         // Update notification UI based on loaded state
         if (enableNotificationsCheckbox) enableNotificationsCheckbox.checked = enableNotifications;
@@ -903,14 +913,23 @@ if (resetManualInTimeBtn) resetManualInTimeBtn.addEventListener('click', handleR
 
 // Dark Mode Toggle handler
 function handleDarkModeToggle() {
-    isDarkMode = !isDarkMode;
-    if (isDarkMode) {
-        body.classList.add('dark');
-        if (darkModeIcon) darkModeIcon.textContent = '☀️'; // Sun icon for dark mode
+   // Prefer using common.js theme toggles which persist 'tweakiq_theme'
+    if (typeof window.toggleTheme === 'function') {
+        window.toggleTheme();
     } else {
-        body.classList.remove('dark');
-        if (darkModeIcon) darkModeIcon.textContent = '🌙'; // Moon icon for light mode
+        // fallback: toggle body class (older behavior)
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) document.body.classList.add('dark');
+        else document.body.classList.remove('dark');
     }
+    // Refresh local UI indicator
+    try {
+        const theme = (typeof window.getTheme === 'function') ? window.getTheme() : (isDarkMode ? 'dark' : 'light');
+        isDarkMode = (theme === 'dark');
+        if (darkModeIcon) darkModeIcon.textContent = isDarkMode ? '☀️' : '🌙';
+    } catch (e) { /* ignore */ }
+
+    // Persist other app state, but do NOT store theme inside officeTimeCalculatorState (avoid dual sources)
     saveState();
 }
 if (darkModeToggle) darkModeToggle.addEventListener('click', handleDarkModeToggle);
@@ -994,7 +1013,7 @@ if (shareBtn) {
         window.open(url, "_blank");
 
     });
-}
+}}
 
 // Exporting the functions to the window object so other pages can use them
 window.loadReports = loadReports;
@@ -1189,5 +1208,6 @@ if (tutorialSkipBtn) {
 
 // Add startTutorial to the global scope
 window.startTutorial = startTutorial;
+
 
 

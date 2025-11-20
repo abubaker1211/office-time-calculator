@@ -69,11 +69,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('darkModeToggle');
   const icon = document.getElementById('theme-icon');
 
-  function apply(theme){
-    if(theme === 'dark'){ doc.setAttribute('data-theme','dark'); }
-    else { doc.removeAttribute('data-theme'); }
+    function apply(theme){
+    if(theme === 'dark'){ 
+      doc.setAttribute('data-theme','dark'); 
+    }
+    else { 
+      doc.removeAttribute('data-theme'); 
+    }
+
+    // body class sync — keep legacy pages/CSS that depend on body.dark working
+    try {
+      if (theme === 'dark') {
+        if (!document.body.classList.contains('dark')) document.body.classList.add('dark');
+      } else {
+        if (document.body.classList.contains('dark')) document.body.classList.remove('dark');
+      }
+    } catch (e) {
+      // If body isn't available yet, attempt later (no-op)
+      console.warn('theme: body class sync failed', e);
+    }
+
     if(icon) icon.textContent = theme === 'dark' ? '🌙' : '🌞';
   }
+
+    // read current theme, prefer saved value
+  window.getTheme = function(){
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved === 'dark' || saved === 'light') return saved;
+    } catch(e){}
+    const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefers ? 'dark' : 'light';
+  };
+
+  // keep setTheme writing to storage (already done), but ensure body sync by calling apply()
+  const originalSetTheme = window.setTheme;
+  window.setTheme = function(t){
+    try { localStorage.setItem(KEY, t); } catch(e){}
+    apply(t);
+  };
+
 
   // init: saved > system
   try {

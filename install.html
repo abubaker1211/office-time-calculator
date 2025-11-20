@@ -81,27 +81,27 @@
       
     </footer>
   <script>
-    // Function to apply dark mode based on local storage
-    function applyDarkModeOnLoad() {
-        const savedState = localStorage.getItem('officeTimeCalculatorState');
-        if (savedState) {
-            try {
-                const state = JSON.parse(savedState);
-                if (state.isDarkMode) {
-                    document.body.classList.add('dark');
-                } else {
-                    document.body.classList.remove('dark');
-                }
-            } catch (e) {
-                console.error("Error parsing stored state for dark mode:", e);
-                // Optionally remove corrupted state
-                localStorage.removeItem('officeTimeCalculatorState');
-            }
-        }
-    }
+    // // Function to apply dark mode based on local storage
+    // function applyDarkModeOnLoad() {
+    //     const savedState = localStorage.getItem('officeTimeCalculatorState');
+    //     if (savedState) {
+    //         try {
+    //             const state = JSON.parse(savedState);
+    //             if (state.isDarkMode) {
+    //                 document.body.classList.add('dark');
+    //             } else {
+    //                 document.body.classList.remove('dark');
+    //             }
+    //         } catch (e) {
+    //             console.error("Error parsing stored state for dark mode:", e);
+    //             // Optionally remove corrupted state
+    //             localStorage.removeItem('officeTimeCalculatorState');
+    //         }
+    //     }
+    // }
 
-    // Apply dark mode when the page loads
-    document.addEventListener('DOMContentLoaded', applyDarkModeOnLoad);
+    // // Apply dark mode when the page loads
+    // document.addEventListener('DOMContentLoaded', applyDarkModeOnLoad);
 
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
