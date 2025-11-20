@@ -30,105 +30,22 @@
     */
 
     /* CSS Variables for easier theme management */
+    :root {
+        --body-bg: #f5f7fa;
+        --container-bg: #ffffff;
+        --primary-accent: #3f51b5;
+        --secondary-text: #546e7a;
+        --secondary-text-label: #546e7a;
+        --input-bg: #eceff1;
+        --input-border: #cfd8dc;
+        --status-box-bg: #e8f5e9;
+        --status-text-color: #388e3c;
+        --status-display-text-color: #1b5e20;
+        --ad-placeholder-bg: #eceff1;
+        --ad-placeholder-border: #cfd8dc;
+    }
 
-/* ====== RESPONSIVE SAFEGUARDS (ADD THIS) ====== */
-*, *::before, *::after { box-sizing: border-box; }
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden; /* prevent horizontal scroll caused by wide elements */
-}
-
-/* make main app wrapper behave like a mobile app */
-.content-wrapper {
-  width: 100%;
-  max-width: 420px; /* phone-friendly width — we can adjust later */
-  margin: 12px auto;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-/* clamp large embedded content */
-img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonial-item, .tip-card {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* allow flex children to wrap instead of forcing overflow */
-.input-flex-wrapper, .button-group {
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-/* Theme toggle button (uses theme tokens) */
-.theme-toggle {
-  background: var(--card-bg);
-  color: var(--secondary-text);
-  border: 1px solid var(--surface-border);
-  padding: 6px 12px;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 180ms ease, color 180ms ease, transform 120ms ease;
-}
-.theme-toggle:hover { transform: translateY(-1px); }
-.theme-toggle #theme-icon { font-size: 1.05rem; line-height: 1; }
-
-/* ===== Modern Theme Tokens (REPLACED) ===== */
-:root{
-  color-scheme: light;
-  --bg: #ffffff;
-  --card-bg: #f8fafc;
-  --primary-accent: #3f51b5;
-  --primary-accent-2: #0ea5e9;
-  --primary-contrast: #ffffff;
-  --primary-text: #0f172a;
-  --secondary-text: #546e7a;
-  --secondary-text-label: #546e7a;
-   --container-bg: #ffffff; 
-  --muted: #94a3b8;
-  --input-bg: #eceff1;
-  --input-border: #cfd8dc;
-  --status-box-bg: #e8f5e9;
-  --status-text-color: #388e3c;
-  --status-display-text-color: #1b5e20;
-  --ad-placeholder-bg: #eceff1;
-  --ad-placeholder-border: #cfd8dc;
-  --surface-border: rgba(2,6,23,0.06);
-  --shadow-elev: 0 8px 24px rgba(2,6,23,0.08);
-  --glass: rgba(255,255,255,0.6);
-  --page-padding: 16px;
-  --radius: 12px;
-}
-
-/* Dark theme tokens — applied when html[data-theme="dark"] is set */
-:root[data-theme="dark"]{
-  color-scheme: dark;
-  --bg: #071026;
-  --card-bg: #0b1220;
-  --primary-accent: #64b5f6;
-  --primary-accent-2: #38bdf8;
-  --primary-contrast: #0b1220;
-  --primary-text: #e6eef8;
-  --secondary-text: #93a4bf;
-  --secondary-text-label: #b0bec5;
-  --muted: #6b7b93;
-  --input-bg: #14202a;
-  --input-border: #253246;
-  --status-box-bg: #0f1724;
-  --status-text-color: #b0bec5;
-  --status-display-text-color: #64b5f6;
-  --ad-placeholder-bg: #0f1724;
-  --ad-placeholder-border: #253246;
-  --surface-border: rgba(255,255,255,0.04);
-  --shadow-elev: 0 8px 24px rgba(2,6,23,0.6);
-  --glass: rgba(10,14,20,0.6);
-}
-
-
-  html[data-theme="dark"] {
+    body.dark {
         --body-bg: #2c3e50;
         --container-bg: #34495e;
         --primary-accent: #64b5f6;
@@ -157,16 +74,12 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         color: var(--secondary-text); /* Default text color from palette */
     }
 
-
-
-    
     /* Base Container Styling */
     .container {
         background-color: var(--container-bg); /* Use variable */
         padding: 2rem;
         border-radius: 1rem;
-    box-shadow: var(--shadow-elev);
-
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
         width: 100%;
         max-width: 400px;
         text-align: center;
@@ -261,7 +174,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     }
 
     .btn-in:hover {
-       background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);/* Darker Indigo */
+        background-color: #303f9f; /* Darker Indigo */
     }
 
     .btn-out {
@@ -277,8 +190,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         padding: 0.75rem 1rem;
         font-size: 1rem;
         border-radius: 0.5rem;
-        box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         color: white;
         font-weight: bold;
         cursor: pointer;
@@ -324,8 +236,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         background-color: var(--status-box-bg); /* Use variable */
         padding: 1.5rem;
         border-radius: 0.75rem;
-       box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         margin-top: 2rem;
         color: var(--status-text-color); /* Use variable */
         transition: background-color 0.3s ease, color 0.3s ease;
@@ -361,8 +272,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         color: var(--secondary-text-label); /* Use variable */
         font-size: 0.9rem;
         margin-top: 2rem;
-        box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
@@ -375,10 +285,9 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         background-color: var(--container-bg);
         padding: 2rem;
         border-radius: 1rem;
-        box-shadow: var(--shadow-elev);
-
-        /* width: 100%;
-        max-width: 400px; */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 400px;
         text-align: center;
         margin-top: 2rem;
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -444,41 +353,37 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         border-radius: 0.5rem;
         cursor: pointer;
         margin-top: 1.5rem;
-         margin-left: 20px;
         font-weight: bold;
-      box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-       #exportReportsBtn {
-        background-color: #4CAF50;
+    #exportReportsBtn {
+        background-color: #3cb52c;
         color: white;
         padding: 0.75rem 1.5rem;
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
         margin-top: 1.5rem;
-        margin-left: 100px;
+        margin-left: 80px;
         font-weight: bold;
-      box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-  
-
-      #exportReportsBtn:hover {
-        background-color: #2a952e;
+    #exportReportsBtn:hover {
+        background-color: #207215;
         transform: translateY(-1px);
         box-shadow: 0 3px 5px rgba(0,0,0,0.15);
     }
 
-    #clearAllReportsBtn:hover {
+      #clearAllReportsBtn:hover {
         background-color: #d32f2f;
         transform: translateY(-1px);
         box-shadow: 0 3px 5px rgba(0,0,0,0.15);
     }
+
 
     /* View Reports button styling */
     #viewReportsBtn {
@@ -488,7 +393,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     }
 
     #viewReportsBtn:hover {
-       background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);
+        background-color: #303f9f;
     }
 
     /* Small date text styling */
@@ -603,15 +508,13 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         border-radius: 0.5rem;
         border: none;
         color: white;
-        background-color: var(--primary-accent);
-
+        background-color: #3f51b5;
         transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-       box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .filter-sort-controls button:hover {
-       background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);
+        background-color: #303f9f;
         transform: translateY(-1px);
         box-shadow: 0 3px 5px rgba(0,0,0,0.15);
     }
@@ -657,11 +560,9 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     .notification-settings {
         padding: 20px;
         margin-bottom: 20px;
-        background-color: var(--container-bg);
- /* This specific color will override var(--input-bg) in light mode */
+        background-color: #ffffff; /* This specific color will override var(--input-bg) in light mode */
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .notification-settings h3 {
         margin-top: 0;
@@ -802,8 +703,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         color: #ff9800; /* (needs to be var) */
     }
     .user-testimonials .testimonial-item {
-       background-color: var(--container-bg);
- /* (needs to be var) */
+        background-color: #ffffff; /* (needs to be var) */
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 10px;
@@ -901,8 +801,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         padding: 20px;
         background-color: var(--container-bg);
         border-radius: 1rem;
-       box-shadow: var(--shadow-elev);
-
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
         color: var(--secondary-text);
         transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
     }
@@ -988,7 +887,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     }
 
     .back-to-app-link .button:hover {
-        background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);
+        background-color: #303f9f;
         transform: translateY(-2px);
         box-shadow: 0 6px 10px rgba(0,0,0,0.2);
     }
@@ -1293,9 +1192,19 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     }
 
     .placeholder-link:hover {
-        background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);/* Darker version of primary accent in light mode */
+        background-color: #303f9f; /* Darker version of primary accent in light mode */
     }
 
+    /* Specific placeholder backgrounds/colors */
+    .productivity-tips {
+        /* No unique background/border here, let --ad-placeholder-bg define */
+    }
+    .user-testimonials {
+        /* No unique background/border here, let --ad-placeholder-bg define */
+    }
+    .pwa-features {
+        /* No unique background/border here, let --ad-placeholder-bg define */
+    }
 
     .user-testimonials .testimonial-item {
         background-color: var(--container-bg); /* Use container bg for nested items */
@@ -1383,15 +1292,13 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         border-radius: 0.5rem;
         border: none;
         color: white;
-      background-color: var(--primary-accent);
-
+        background-color: #3f51b5;
         transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-       box-shadow: 0 2px 4px rgba(2,6,23,0.06);
-
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .filter-sort-controls button:hover {
-      background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);
+        background-color: #303f9f;
         transform: translateY(-1px);
         box-shadow: 0 3px 5px rgba(0,0,0,0.15);
     }
@@ -1495,8 +1402,8 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     align-items: center;
     gap: 0.5rem;
     }
-/* 
-    deepseek changes */
+
+    //deepseek changes
     /* ===== ENHANCED BUTTON FEEDBACK ===== */
     /* Add these styles to your existing maincss.css file */
 
@@ -1815,11 +1722,6 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     border-radius: 34px;
     transition: background-color 0.4s;
     cursor: pointer;
-    overflow: hidden; /* prevents slider from spilling out */
-  border: 1px solid #ccc;
-}
-.slider {
-  background-color: var(--slider-bg);
 }
 
 .switch.disabled {
@@ -1837,7 +1739,6 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     background-color: var(--container-bg);
     border-radius: 50%;
     transition: transform 0.4s;
-    
 }
 
 .switch.on {
@@ -1930,63 +1831,6 @@ body.dark .switch.on {
 
 body.dark .tutorial-message-box {
     box-shadow: 0 5px 15px rgba(0,0,0,0.8);
-}
+}s
 
-
-#ad-slot-1,
-#ad-slot-2,
-#ad-slot-3,
-#ad-slot-4,
-.ad-slot {
-  width: 100%;
-  max-width: 420px;
-  min-height: 90px;
-  margin: 12px auto;
-  display: block;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-/* Smaller phones */
-@media (max-width: 420px) {
-  #ad-slot-1,
-  #ad-slot-2,
-  #ad-slot-3,
-  #ad-slot-4,
-  .ad-slot {
-    min-height: 70px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-}
-/* Sticky bottom ad */
-/* Sticky bottom ad */
-/* Sticky bottom ad (FINAL FIXED) */
-/* Sticky bottom ad — strict clamp to prevent expansion */
-.sticky-ad {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
-  height: 60px !important;        /* FORCED fixed height */
-  min-height: 60px !important;
-  max-height: 60px !important;
-  padding: 0;
-  margin: 0;
-  background: rgba(255,255,255,0.98);
-  box-shadow: 0 -3px 10px rgba(0,0,0,0.15);
-  z-index: 99999;
-  text-align: center;
-  overflow: hidden;               /* hide any oversized content */
-  display: flex;
-  align-items: center;            /* vertically center ad content */
-  justify-content: center;
-}
-
-/* Spacing for in-article ads */
-.adsbygoogle {
-  margin: 16px 0;
-}
 

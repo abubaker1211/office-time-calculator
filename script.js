@@ -166,7 +166,7 @@ function saveState() {
         shiftDurationInput: shiftDurationInput ? parseFloat(shiftDurationInput.value) : 9,
         currentShiftOutTime: currentShiftOutTime ? currentShiftOutTime.toISOString() : null,
         manualInTimeValue: manualInTimeInput ? manualInTimeInput.value : '',
-       // isDarkMode: isDarkMode,
+        isDarkMode: isDarkMode,
         enableNotifications: enableNotifications, // Save notification preference
         reminderMinutesBeforeOut: reminderMinutesInput ? reminderMinutesInput.value : 15, // Save reminder minutes
         notificationSentForCurrentShift: notificationSentForCurrentShift // Save notification sent status
@@ -211,24 +211,14 @@ function loadState() {
                 startBreakTimer();
             }
         }
-      
-            // --- THEME SYNC: use common.js theme store as source of truth ---
-    try {
-        const theme = (typeof window.getTheme === 'function') ? window.getTheme() : localStorage.getItem('tweakiq_theme');
-        isDarkMode = (theme === 'dark');
+        // Load hone par dark mode apply karein
         if (isDarkMode) {
-            document.body.classList.add('dark');
-            if (darkModeIcon) darkModeIcon.textContent = '☀️';
+            body.classList.add('dark');
+            if (darkModeIcon) darkModeIcon.textContent = '☀️'; // Sun icon for dark mode
         } else {
-            document.body.classList.remove('dark');
-            if (darkModeIcon) darkModeIcon.textContent = '🌙';
+            body.classList.remove('dark');
+            if (darkModeIcon) darkModeIcon.textContent = '🌙'; // Moon icon for light mode
         }
-    } catch(e) {
-        // fallback if getTheme isn't present
-    }
-
-        
-
 
         // Update notification UI based on loaded state
         if (enableNotificationsCheckbox) enableNotificationsCheckbox.checked = enableNotifications;
@@ -913,23 +903,14 @@ if (resetManualInTimeBtn) resetManualInTimeBtn.addEventListener('click', handleR
 
 // Dark Mode Toggle handler
 function handleDarkModeToggle() {
-   // Prefer using common.js theme toggles which persist 'tweakiq_theme'
-    if (typeof window.toggleTheme === 'function') {
-        window.toggleTheme();
+    isDarkMode = !isDarkMode;
+    if (isDarkMode) {
+        body.classList.add('dark');
+        if (darkModeIcon) darkModeIcon.textContent = '☀️'; // Sun icon for dark mode
     } else {
-        // fallback: toggle body class (older behavior)
-        isDarkMode = !isDarkMode;
-        if (isDarkMode) document.body.classList.add('dark');
-        else document.body.classList.remove('dark');
+        body.classList.remove('dark');
+        if (darkModeIcon) darkModeIcon.textContent = '🌙'; // Moon icon for light mode
     }
-    // Refresh local UI indicator
-    try {
-        const theme = (typeof window.getTheme === 'function') ? window.getTheme() : (isDarkMode ? 'dark' : 'light');
-        isDarkMode = (theme === 'dark');
-        if (darkModeIcon) darkModeIcon.textContent = isDarkMode ? '☀️' : '🌙';
-    } catch (e) { /* ignore */ }
-
-    // Persist other app state, but do NOT store theme inside officeTimeCalculatorState (avoid dual sources)
     saveState();
 }
 if (darkModeToggle) darkModeToggle.addEventListener('click', handleDarkModeToggle);
@@ -973,15 +954,6 @@ if (reminderMinutesInput) reminderMinutesInput.addEventListener('input', handleR
 // Initial load: Local Storage se state load karein
 document.addEventListener('DOMContentLoaded', loadState);
 
-// Defensive: ensure tutorial elements exist before using tutorial APIs
-if (!tutorialBtn || !tutorialOverlay || !tutorialMessageBox || !tutorialNextBtn || !tutorialSkipBtn) {
-    // If any tutorial element is missing, make startTutorial a no-op to avoid errors when other pages call it.
-    window.startTutorial = function () {
-        console.warn("Tutorial not available on this page (missing DOM elements).");
-    };
-}
-
-
 
 // Service Worker Register karein
 if ('serviceWorker' in navigator) {
@@ -997,12 +969,7 @@ if ('serviceWorker' in navigator) {
 }
 // share button click handler
 if (document.getElementById("shareBtn")) {
-
-
-    const shareBtn = document.getElementById("shareBtn");
-if (shareBtn) {
-  shareBtn.addEventListener("click", () => {
-   
+    document.getElementById("shareBtn").addEventListener("click", () => {
         const message = `✅ Check out this awesome 
             *Office Time Tracker web app!*
             Track your shift, breaks, and more in real-time.
@@ -1013,7 +980,7 @@ if (shareBtn) {
         window.open(url, "_blank");
 
     });
-}}
+}
 
 // Exporting the functions to the window object so other pages can use them
 window.loadReports = loadReports;
@@ -1102,6 +1069,77 @@ function endTutorial() {
     tutorialStep = 0;
 }
 
+function showTutorialStep() {
+   // Before moving to a new step, clean up the previous one
+    const prevHighlighted = document.querySelector('.tutorial-highlighted');
+    if (prevHighlighted) {
+        prevHighlighted.classList.remove('tutorial-highlighted');
+    }
+
+    // Check if the tutorial is over
+    if (tutorialStep >= tutorialSteps.length) {
+        endTutorial();
+        return;
+    }
+
+    const currentStep = tutorialSteps[tutorialStep];
+    if (currentStep && currentStep.element) {
+        // Highlight the current element
+        currentStep.element.classList.add('tutorial-highlighted');
+
+        // Get the element's position and dimensions
+        const elementRect = currentStep.element.getBoundingClientRect();
+        
+        // Calculate the target scroll position (center the element)
+        const targetScrollPosition = elementRect.top + window.pageYOffset - (window.innerHeight / 2) + (elementRect.height / 2);
+        
+        window.scrollTo({
+            top: targetScrollPosition,
+            behavior: 'smooth'
+        });
+        
+        // After scrolling, get the new, on-screen position
+        const newElementRect = currentStep.element.getBoundingClientRect();
+
+        // Calculate message box position
+        const messageBoxHeight = tutorialMessageBox.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        
+        let newTop;
+        // Check if there's enough space below the element
+        if (newElementRect.bottom + messageBoxHeight + 20 < viewportHeight) {
+            newTop = newElementRect.bottom + 20; // Position below the element with a 20px margin
+        } else {
+            newTop = newElementRect.top - messageBoxHeight - 20; // Position above the element with a 20px margin
+            // Ensure the box doesn't go off the top of the screen
+            if (newTop < 0) {
+                newTop = 20;
+            }
+        }
+        
+        const newLeft = newElementRect.left + (newElementRect.width / 2) - (tutorialMessageBox.offsetWidth / 2);
+
+        tutorialMessageBox.style.top = `${newTop}px`;
+        tutorialMessageBox.style.left = `${newLeft}px`;
+        tutorialMessageBox.style.transform = 'translate(0, 0)'; // Reset transform
+
+        tutorialMessageText.textContent = currentStep.message;
+        tutorialMessageBox.style.display = 'block';
+
+        // Check for the last step and update the button text
+        if (tutorialStep === tutorialSteps.length - 1) {
+            tutorialNextBtn.textContent = 'End Tutorial';
+        } else {
+            tutorialNextBtn.textContent = 'Next';
+        }
+
+    } else {
+        // If an element is missing, skip the step
+        tutorialStep++;
+        showTutorialStep();
+        return;
+    }   
+}
 
 
 function showTutorialStep() {
@@ -1208,6 +1246,3 @@ if (tutorialSkipBtn) {
 
 // Add startTutorial to the global scope
 window.startTutorial = startTutorial;
-
-
-
