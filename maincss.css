@@ -1296,16 +1296,6 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
         background-color: color-mix(in srgb, var(--primary-accent) 80%, black 20%);/* Darker version of primary accent in light mode */
     }
 
-    /* Specific placeholder backgrounds/colors */
-    .productivity-tips {
-        /* No unique background/border here, let --ad-placeholder-bg define */
-    }
-    .user-testimonials {
-        /* No unique background/border here, let --ad-placeholder-bg define */
-    }
-    .pwa-features {
-        /* No unique background/border here, let --ad-placeholder-bg define */
-    }
 
     .user-testimonials .testimonial-item {
         background-color: var(--container-bg); /* Use container bg for nested items */
@@ -1825,6 +1815,11 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     border-radius: 34px;
     transition: background-color 0.4s;
     cursor: pointer;
+    overflow: hidden; /* prevents slider from spilling out */
+  border: 1px solid #ccc;
+}
+.slider {
+  background-color: var(--slider-bg);
 }
 
 .switch.disabled {
@@ -1842,6 +1837,7 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
     background-color: var(--container-bg);
     border-radius: 50%;
     transition: transform 0.4s;
+    
 }
 
 .switch.on {
@@ -1993,3 +1989,4 @@ body.dark .tutorial-message-box {
 .adsbygoogle {
   margin: 16px 0;
 }
+
