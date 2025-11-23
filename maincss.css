@@ -1403,7 +1403,7 @@
     gap: 0.5rem;
     }
 
-    //deepseek changes
+   
     /* ===== ENHANCED BUTTON FEEDBACK ===== */
     /* Add these styles to your existing maincss.css file */
 
@@ -1831,6 +1831,64 @@ body.dark .switch.on {
 
 body.dark .tutorial-message-box {
     box-shadow: 0 5px 15px rgba(0,0,0,0.8);
-}s
+}
 
+/* ---------- RESPONSIVE SAFEGUARDS (ADD THIS) ---------- */
+/* Use border-box everywhere so padding doesn't cause overflow */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Ensure page never horizontally scrolls due to elements slightly larger than viewport */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Make content wrapper fully responsive and respect the viewport width */
+.content-wrapper {
+  width: 100%;
+  max-width: 420px;        /* keeps layout narrow like a phone app; tweak later if needed */
+  margin: 12px auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Make header/footer responsive */
+header, footer {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Clamp images, iframes, ad slots, and any big blocks so they don't force overflow */
+img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonial-item, .tip-card {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tutorial/message boxes: allow them to shrink on small screens */
+.tutorial-message-box {
+  min-width: 0;     /* remove hard min-width that could overflow */
+  width: calc(100% - 40px);
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+/* Buttons inside flex rows: allow wrapping and prevent forced overflow */
+.input-flex-wrapper, .button-group {
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+
+/* sssAd placeholder styling — reserves space for ads without breaking layout */
+#ad-slot-1,#ad-slot-2,#ad-slot-3, .ad-slot {
+  width: 100%;
+  max-width: 420px;     /* same as content wrapper for consistency */
+  min-height: 90px;     /* reserve vertical space to avoid layout shift */
+  margin: 12px auto;
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+@media (max-width: 420px) {
+ #ad-slot-1,#ad-slot-2,#ad-slot-3, .ad-slot { min-height: 70px; padding-left:8px; padding-right:8px; }
+}
 
