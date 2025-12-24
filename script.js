@@ -16,6 +16,11 @@ const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 const darkModeIcon = document.getElementById('darkModeIcon'); // Dark Mode Icon element
 
+const manualBreakMinutesInput = document.getElementById('manualBreakMinutes');
+const addBreakBtn = document.getElementById('addBreakBtn');
+const removeBreakBtn = document.getElementById('removeBreakBtn');
+
+
 // Reports ke liye naye elements
 const viewReportsBtn = document.getElementById('viewReportsBtn');
 const reportsSection = document.getElementById('reportsSection');
@@ -95,6 +100,10 @@ const tutorialSteps = [{
     element: viewReportsBtn,
     message: "Want to see your work history? Click 'View Reports' to see, sort, and export all your past workdays."
 }];
+
+// Manual break adjustment element (New)
+const manualBreakAdjust = document.getElementById('manualBreakAdjust');
+
 
 
 // --- Utility Functions ---
@@ -210,7 +219,8 @@ function loadState() {
                 pauseInTimer();
                 startBreakTimer();
             }
-        }
+
+         } 
         // Load hone par dark mode apply karein
         if (isDarkMode) {
             body.classList.add('dark');
@@ -235,6 +245,9 @@ function loadState() {
 
 // UI ko current state ke hisaab se update karein
 function updateUI() {
+    if (manualBreakAdjust) {
+    manualBreakAdjust.style.display = inTime ? 'block' : 'none';
+}
     if (inTime) {
         if (inDateDisplay) inDateDisplay.textContent = formatOnlyDate(inTime); // IN Date update karein
         if (statusDisplay) statusDisplay.textContent = `IN at: ${formatTime(inTime)}`; // Sirf IN Time update karein
@@ -356,6 +369,15 @@ function updateUI() {
         if (totalBreakTimeDisplay) totalBreakTimeDisplay.style.display = 'none';
     }
     
+
+    // Manual Break Adjustment lock/unlock (single source of truth)
+if (manualBreakAdjust) {
+    const shouldDisable = !inTime || isBreakOn;
+
+    manualBreakAdjust.style.pointerEvents = shouldDisable ? 'none' : 'auto';
+    manualBreakAdjust.style.opacity = shouldDisable ? '0.5' : '1';
+}
+
     saveState();
 }
 
@@ -867,6 +889,70 @@ function toggleBreak() {
 if (breakToggleBtn) breakToggleBtn.addEventListener('click', toggleBreak);
 if (breakSwitch) breakSwitch.addEventListener('click', toggleBreak);
 
+if (addBreakBtn) {
+    addBreakBtn.addEventListener('click', handleAddBreakMinutes);
+}
+
+if (removeBreakBtn) {
+    removeBreakBtn.addEventListener('click', handleRemoveBreakMinutes);
+}
+
+
+
+function handleRemoveBreakMinutes() {
+    if (!inTime || isBreakOn) return;
+
+    const minutesToRemove = parseInt(manualBreakMinutesInput.value, 10);
+
+    if (isNaN(minutesToRemove) || minutesToRemove <= 0) {
+        showMessage("Please enter a valid number of minutes.");
+        return;
+    }
+
+    if (minutesToRemove > totalBreakDurationMinutes) {
+        showMessage("Cannot remove more break time than already added.");
+        return;
+    }
+
+    totalBreakDurationMinutes -= minutesToRemove;
+
+    manualBreakMinutesInput.value = '';
+    updateLeavingTime();
+    saveState();
+}
+
+function handleAddBreakMinutes() {
+    if (!inTime || isBreakOn) return;
+
+    const minutesToAdd = parseInt(manualBreakMinutesInput.value, 10);
+
+    if (isNaN(minutesToAdd) || minutesToAdd <= 0) {
+        showMessage("Please enter a valid number of minutes.");
+        return;
+    }
+
+    const now = new Date();
+
+    // Total minutes since IN
+    const totalElapsedMinutes =
+        (now.getTime() - inTime.getTime()) / (1000 * 60);
+
+    // Actual worked minutes (excluding existing breaks)
+    const workedMinutes =
+        totalElapsedMinutes - totalBreakDurationMinutes;
+
+    if (minutesToAdd > workedMinutes) {
+        showMessage("Break time cannot be greater than worked time.");
+        return;
+    }
+
+    totalBreakDurationMinutes += minutesToAdd;
+
+    manualBreakMinutesInput.value = '';
+    updateLeavingTime();
+    saveState();
+}
+
 
 // Shift duration change hone par leaving time update karein
 function handleShiftDurationInput() {
@@ -1035,6 +1121,8 @@ if (outBtn) {
         if (confirmShiftBtn) {
             confirmShiftBtn.disabled = true;
         }
+        updateUI();
+
     });
 }
 
@@ -1242,6 +1330,19 @@ if (tutorialNextBtn) {
 
 if (tutorialSkipBtn) {
     tutorialSkipBtn.addEventListener('click', endTutorial);
+}
+
+
+// Auto-reload page when a new Service Worker takes control
+if ('serviceWorker' in navigator) {
+    let refreshing = false;
+
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshing) return;
+        refreshing = true;
+        console.log('[SW] New version activated. Reloading page...');
+        window.location.reload();
+    });
 }
 
 // Add startTutorial to the global scope

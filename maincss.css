@@ -1195,16 +1195,7 @@
         background-color: #303f9f; /* Darker version of primary accent in light mode */
     }
 
-    /* Specific placeholder backgrounds/colors */
-    .productivity-tips {
-        /* No unique background/border here, let --ad-placeholder-bg define */
-    }
-    .user-testimonials {
-        /* No unique background/border here, let --ad-placeholder-bg define */
-    }
-    .pwa-features {
-        /* No unique background/border here, let --ad-placeholder-bg define */
-    }
+
 
     .user-testimonials .testimonial-item {
         background-color: var(--container-bg); /* Use container bg for nested items */
@@ -1891,4 +1882,12 @@ img, picture, svg, iframe, .ad-placeholder, .ad-content-placeholder, .testimonia
 @media (max-width: 420px) {
  #ad-slot-1,#ad-slot-2,#ad-slot-3, .ad-slot { min-height: 70px; padding-left:8px; padding-right:8px; }
 }
+
+/* Lock manual break adjustment when break is ON */
+.manual-break-locked,
+.manual-break-locked * {
+    pointer-events: none !important;
+    opacity: 0.5;
+}
+
 
